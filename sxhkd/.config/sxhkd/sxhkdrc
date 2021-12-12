@@ -1,0 +1,48 @@
+XF86MonBrightness{Down,Up}
+	light {-U,-A} 10
+
+XF86Audio{Play,Next,Prev}
+	player {toggle,next,prev}
+
+XF86AudioMute
+	pulse-ctl toggle
+
+XF86Audio{Lower,Raise}Volume
+	pulse-ctl {down,up}
+
+XF86HomePage
+	qutebrowser
+
+XF86Mail
+	$TERMINAL -e neomutt && notmuch new && pkill -RTMIN+5 dwmblocks
+
+XF86Calculator
+	$TERMINAL -e scroll newsboat
+	#$TERMINAL qalc
+
+Print
+	scrot -s
+
+super + shift + Return
+	$TERMINAL
+
+super + e
+	pcmanfm
+
+super + y
+	xclip -selection clipboard -o | xargs mpv
+
+super + c
+	$TERMINAL -e cava
+
+super + o
+	gopass ls --flat | dmenu | xargs --no-run-if-empty gopass show -f | head -n 1 | xdotool type --clearmodifiers --delay 400 --file -
+
+super + u
+	passfill
+
+super + odiaeresis
+	i3lock -c 000000
+
+super + shift + odiaeresis
+	systemctl suspend
