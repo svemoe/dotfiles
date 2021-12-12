@@ -1,0 +1,110 @@
+#!/bin/sh
+
+[ -z "$BM_DIR" ] \
+	&& echo "No directory specified!" \
+	&& exit 1
+
+urls_file="$BM_DIR/urls.txt"
+archive_file="$BM_DIR/archive.txt"
+
+export GIT_WORK_TREE="$BM_DIR"
+export GIT_DIR="$BM_DIR/.git"
+
+add () {
+	url="$1"
+	cat "$urls_file" "$archive_file" | grep "$url" \
+		&& notify-send "Already saved!" \
+		&& exit
+	[ -z "$2" ] \
+		&& title="$(curl --compressed --location $url \
+			| grep -Eo '<title>.*</title>' \
+			| sed -E 's-</?title>--g')" \
+		|| title="$2"
+	
+	echo "$url $title" >> "$urls_file"
+	
+	notify-send "Bookmark added! ($title)"
+}
+
+list () {
+	[ -z "$1" ] \
+		&& file="$urls_file" \
+		|| file="$1"
+	cat -n "$file"
+}
+
+archive () {
+	url="$1"
+	[ -z "$2" ] \
+		&& from_file="$urls_file" \
+		|| from_file="$2"
+	[ -z "$3" ] \
+		&& to_file="$archive_file" \
+		|| to_file="$3"
+
+	sed -n "${url}p" "$from_file" >> "$to_file"
+	delete "$url" "$from_file"
+}
+
+delete () {
+	url="$1"
+	[ -z "$2" ] \
+		&& file="$urls_file" \
+		|| file="$2"
+
+	sed -i "${url}d" "$file"
+}
+
+open () {
+	[ -z "$2" ] \
+		&& file="$urls_file" \
+		|| file="$2"
+	url="$(sed -n "$1p" "$file" | awk '{print $1}')"
+
+	xdg-open "$url"
+}
+
+interactive () {
+	[ -z "$1" ] \
+		&& from_file="$urls_file" \
+		|| from_file="$1"
+	[ -z "$2" ] \
+		&& to_file="$archive_file" \
+		|| to_file="$2"
+
+	line="$(list "$from_file" | fzf | awk '{print $1}')"
+	[ -z "$line" ] && exit
+	action="$(printf "open\narchive\ndelete\n" | fzf)"
+	[ -z "$action" ] && exit
+	"$action" "$line" "$from_file" "$to_file"
+}
+
+help () {
+	echo "Usage: $(basename $1) COMMAND"
+	echo "Commands:"
+	cat $1 | grep -E "^\s*[a-z|]+)" | awk '{print "\t"$1"\t"$2}'
+}
+
+[ -z "$1" ] && help "$0" && exit 1
+
+case $1 in
+	a) archive "$2"
+	;;
+	d|del) delete "$2"
+	;;
+	l|list) list
+	;;
+	la) list "$archive_file"
+	;;
+	o|open) open "$2"
+	;;
+	i) interactive
+	;;
+	ia) interactive "$archive_file" "$urls_file"
+	;;
+	add) add "$2"
+	;;
+	git) "$@"
+	;;
+	*) add "$1" "$2"
+esac

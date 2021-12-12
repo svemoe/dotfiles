@@ -1,0 +1,8 @@
+#!/bin/sh
+
+file=~/documents/documents/timelog.txt
+notify=termux-toast
+
+[ $(grep "$2" $file | sort -k 2,3 | cut -d' ' -f1 | tail -n1) = $1 ] && $notify "Fehler" && exit
+
+echo "$1 $(date +'%Y-%m-%d %H:%M:%S') $2" >> $file && $notify "Log"

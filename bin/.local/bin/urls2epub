@@ -1,0 +1,7 @@
+#!/bin/sh
+
+while IFS= read -r line; do
+    url="$(echo "$line" | cut -f1 -d' ')"
+    hash="$(echo "$url" | sha1sum | cut -f1 -d' ')"
+    pandoc -o "$HOME/documents/articles/$hash.epub" "$url"
+done
