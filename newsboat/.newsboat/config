@@ -1,13 +1,6 @@
-auto-reload no
 refresh-on-startup yes
-
 bookmark-cmd "bm"
 bookmark-autopilot yes
-max-items 99
-mark-as-read-on-hover no
-show-read-articles yes
-show-read-feeds yes
-confirm-exit no
 scrolloff 10
 
 highlight article "^Title:.*$" blue default
