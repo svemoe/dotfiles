@@ -1,3 +1,4 @@
 #!/bin/sh
 
-BM_DIR="$HOME/documents/bookmarks" "$HOME/bin/bm" "$@"
+. ~/.profile
+bm "$@"
