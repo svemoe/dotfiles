@@ -1,2 +1,7 @@
 font:
-      size: 18
+  size: 18
+
+window:
+  padding:
+    x: 5
+    y: 5
