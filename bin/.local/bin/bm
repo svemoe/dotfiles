@@ -87,7 +87,7 @@ help () {
 
 [ -z "$1" ] && help "$0" && exit 1
 
-case $1 in
+case "$1" in
 	a) archive "$2" ;;
 	d|del) delete "$2" ;;
 	e|edit) "$EDITOR" "$urls_file" ;;
