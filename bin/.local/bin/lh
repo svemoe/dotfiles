@@ -1,0 +1,6 @@
+#!/bin/sh
+
+case $1 in
+*.png|*.jpg) curl $1 | setsid -f $IMAGE_VIEWER -;;
+*) setsid -f $BROWSER $1 ;;
+esac
