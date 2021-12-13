@@ -1,6 +1,14 @@
 #!/bin/sh
 
-case $1 in
-*.png|*.jpg) curl $1 | setsid -f $IMAGE_VIEWER -;;
-*) setsid -f $BROWSER $1 ;;
+image() {
+	if [ "$(uname -o)" = "Android" ]; then
+		"$BROWSER" "$1"
+else
+		curl "$1" | setsid -f "$IMAGE_VIEWER" -
+fi
+}
+
+case "$1" in
+*.png|*.jpg) image "$1";;
+*) setsid -f "$BROWSER" "$1" ;;
 esac
