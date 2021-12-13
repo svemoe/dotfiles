@@ -2,6 +2,7 @@ refresh-on-startup yes
 bookmark-cmd "bm"
 bookmark-autopilot yes
 scrolloff 10
+text-width 80
 
 highlight article "^Title:.*$" blue default
 highlight article "Title:" default default
