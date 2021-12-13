@@ -202,6 +202,14 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioMute exec pulsemixer --toggle-mute
+bindsym XF86AudioLowerVolume exec pulsemixer --change-volume -5
+bindsym XF86AudioRaiseVolume exec pulsemixer --change-volume +5
+bindsym XF86HomePage exec $BROWSER
+bindsym XF86Mail exec $TERMINAL --command neomutt
+bindsym XF86Calculator exec $TERMINAL --command qalc
+
 #
 # Status Bar:
 #
