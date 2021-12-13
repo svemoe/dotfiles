@@ -90,6 +90,7 @@ help () {
 case $1 in
 	a) archive "$2" ;;
 	d|del) delete "$2" ;;
+	e|edit) "$EDITOR" "$urls_file" ;;
 	l|list) list ;;
 	la) list "$archive_file" ;;
 	o|open) open "$2" ;;
