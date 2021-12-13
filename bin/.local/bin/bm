@@ -88,23 +88,14 @@ help () {
 [ -z "$1" ] && help "$0" && exit 1
 
 case $1 in
-	a) archive "$2"
-	;;
-	d|del) delete "$2"
-	;;
-	l|list) list
-	;;
-	la) list "$archive_file"
-	;;
-	o|open) open "$2"
-	;;
-	i) interactive
-	;;
-	ia) interactive "$archive_file" "$urls_file"
-	;;
-	add) add "$2"
-	;;
-	git) "$@"
-	;;
-	*) add "$1" "$2"
+	a) archive "$2" ;;
+	d|del) delete "$2" ;;
+	l|list) list ;;
+	la) list "$archive_file" ;;
+	o|open) open "$2" ;;
+	i) interactive ;;
+	ia) interactive "$archive_file" "$urls_file" ;;
+	add) add "$2" ;;
+	git) "$@" ;;
+	*) add "$1" "$2" ;;
 esac
