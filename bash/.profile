@@ -4,6 +4,8 @@ export LEDGER_FILE="$HOME/documents/documents/ledger.txt"
 
 export TERMINAL=alacritty
 export EDITOR=nvim
+export IMAGE_VIEWER=imv
+export LINK_HANDLER=lh
 
 if [ "$(uname -o)" = "Android" ]; then
 	export BROWSER=termux-open-url

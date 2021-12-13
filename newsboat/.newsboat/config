@@ -3,6 +3,7 @@ bookmark-cmd "bm"
 bookmark-autopilot yes
 scrolloff 10
 text-width 80
+browser $LINK_HANDLER
 
 highlight article "^Title:.*$" blue default
 highlight article "Title:" default default
