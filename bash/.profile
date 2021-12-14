@@ -2,15 +2,16 @@ export PATH=$PATH:~/.local/bin
 export BM_DIR=~/documents/bookmarks
 export LEDGER_FILE="$HOME/documents/documents/ledger.txt"
 
-export TERMINAL=alacritty
 export EDITOR=nvim
-export IMAGE_VIEWER=imv
-export LINK_HANDLER=lh
 
 if [ "$(uname -o)" = "Android" ]; then
-	export BROWSER=termux-open-url
+	export BROWSER=termux-open
+	export LINK_HANDLER=termux-open
 else
+	export TERMINAL=alacritty
 	export BROWSER=qutebrowser
+	export LINK_HANDLER=lh
+	export IMAGE_VIEWER=imv
 fi
 
 [ -f ~/.bashrc ] && . ~/.bashrc
