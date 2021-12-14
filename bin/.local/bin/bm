@@ -79,6 +79,11 @@ interactive () {
 	"$action" "$line" "$from_file" "$to_file"
 }
 
+sync () {
+	git diff --quiet || git commit -am "Update"
+	git pull && git push
+}
+
 help () {
 	echo "Usage: $(basename $1) COMMAND"
 	echo "Commands:"
@@ -97,6 +102,7 @@ case "$1" in
 	i) interactive ;;
 	ia) interactive "$archive_file" "$urls_file" ;;
 	add) add "$2" ;;
+	s|sync) sync ;;
 	git) "$@" ;;
 	*) add "$1" "$2" ;;
 esac
