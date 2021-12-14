@@ -13,7 +13,7 @@ export GIT_DIR="$BM_DIR/.git"
 add () {
 	url="$1"
 	cat "$urls_file" "$archive_file" | grep "$url" \
-	  && notify-send "Already saved!" \
+	  && "$NOTIFY" "Already saved!" \
 	  && exit
 	[ -z "$2" ] \
 	  && title="$(curl --compressed --location $url \
@@ -23,7 +23,7 @@ add () {
 	
 	echo "$url $title" >> "$urls_file"
 	
-	notify-send "Bookmark added! ($title)"
+	"$NOTIFY" "Bookmark added! ($title)"
 }
 
 list () {

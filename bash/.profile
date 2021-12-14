@@ -7,11 +7,13 @@ export EDITOR=nvim
 if [ "$(uname -o)" = "Android" ]; then
 	export BROWSER=termux-open
 	export LINK_HANDLER=termux-open
+	export NOTIFY=termux-toast
 else
 	export TERMINAL=alacritty
 	export BROWSER=qutebrowser
 	export LINK_HANDLER=lh
 	export IMAGE_VIEWER=imv
+	export NOTIFY=notify-send
 fi
 
 [ -f ~/.bashrc ] && . ~/.bashrc
