@@ -104,5 +104,6 @@ case "$1" in
 	add) add "$2" ;;
 	s|sync) sync ;;
 	git) "$@" ;;
-	*) add "$1" "$2" ;;
+	http://*|https://*) add "$1" "$2" ;;
+	*) help "$0" ;;
 esac
