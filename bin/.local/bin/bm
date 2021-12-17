@@ -7,11 +7,8 @@
 export GIT_WORK_TREE="$BM_DIR"
 export GIT_DIR="$BM_DIR/.git"
 
-_get_url () {
-	[ -z "$2" ] \
-	  && file="$urls_file" \
-	  || file="$2"
-	sed -n "$1p" "$file" | awk '{print $1}'
+get_url () {
+	sed -n "$1p" "$BM_DIR/$2" | awk '{print $1}'
 }
 
 add () {
@@ -35,34 +32,35 @@ list () {
 }
 
 move () {
-	sed -n "$1p" "$2" >> "$3"
+	sed -n "$1p" "$BM_DIR/$2" >> "$BM_DIR/$3"
 	delete "$1" "$2"
 }
 
 delete () {
-	sed -i "$1d" "$2"
+	sed -i "$1d" "$BM_DIR/$2"
 }
 
 archive () {
-	move "$1" "$2" "$0"
+	move "$1" "$2" "archive"
 }
 
 favorite () {
-	move "$1" "$2" "$0"
+	move "$1" "$2" "favorite"
 }
 
 unread () {
-	move "$1" "$2" "$0"
+	move "$1" "$2" "unread"
 }
 
 open () {
-	xdg-open "$(_get_url "$1")"
+	url="$(get_url $1 $2)"
+	xdg-open "$url"
 }
 
 interactive () {
 	line="$(list "$1" | fzf | awk '{print $1}')"
 	if [ -z "$line" ]; then exit; fi
-	action="$(printf "open\narchive\ndelete\n" | fzf)"
+	action="$(printf "open\narchive\nfavorite\nunread\ndelete\n" | fzf)"
 	if [ -z "$action" ]; then exit; fi
 	"$action" "$line" "$1"
 }
