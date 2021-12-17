@@ -4,6 +4,7 @@ bookmark-autopilot yes
 scrolloff 10
 text-width 80
 browser $LINK_HANDLER
+show-read-feeds no
 
 highlight article "^Title:.*$" blue default
 highlight article "Title:" default default
@@ -32,3 +33,4 @@ bind-key ^D pagedown
 bind-key ^U pageup
 bind-key a toggle-show-read-feeds
 bind-key S reload-all
+bind-key ESC quit
