@@ -4,9 +4,6 @@
   && echo "No directory specified!" \
   && exit 1
 
-urls_file="$BM_DIR/urls.txt"
-archive_file="$BM_DIR/archive.txt"
-
 export GIT_WORK_TREE="$BM_DIR"
 export GIT_DIR="$BM_DIR/.git"
 
@@ -34,51 +31,40 @@ add () {
 }
 
 list () {
-	[ -z "$1" ] \
-	  && file="$urls_file" \
-	  || file="$1"
-	cat -n "$file"
+	cat -n "$BM_DIR/$1"
 }
 
-archive () {
-	url="$1"
-	[ -z "$2" ] \
-	  && from_file="$urls_file" \
-	  || from_file="$2"
-	[ -z "$3" ] \
-	  && to_file="$archive_file" \
-	  || to_file="$3"
-
-	sed -n "${url}p" "$from_file" >> "$to_file"
-	delete "$url" "$from_file"
+move () {
+	sed -n "$1p" "$2" >> "$3"
+	delete "$1" "$2"
 }
 
 delete () {
-	url="$1"
-	[ -z "$2" ] \
-	  && file="$urls_file" \
-	  || file="$2"
+	sed -i "$1d" "$2"
+}
 
-	sed -i "${url}d" "$file"
+archive () {
+	move "$1" "$2" "$0"
+}
+
+favorite () {
+	move "$1" "$2" "$0"
+}
+
+unread () {
+	move "$1" "$2" "$0"
 }
 
 open () {
-	xdg-open "$(_get_url "$@")"
+	xdg-open "$(_get_url "$1")"
 }
 
 interactive () {
-	[ -z "$1" ] \
-	  && from_file="$urls_file" \
-	  || from_file="$1"
-	[ -z "$2" ] \
-	  && to_file="$archive_file" \
-	  || to_file="$2"
-
-	line="$(list "$from_file" | fzf | awk '{print $1}')"
-	[ -z "$line" ] && exit
+	line="$(list "$1" | fzf | awk '{print $1}')"
+	if [ -z "$line" ]; then exit; fi
 	action="$(printf "open\narchive\ndelete\n" | fzf)"
-	[ -z "$action" ] && exit
-	"$action" "$line" "$from_file" "$to_file"
+	if [ -z "$action" ]; then exit; fi
+	"$action" "$line" "$1"
 }
 
 sync () {
@@ -87,25 +73,17 @@ sync () {
 }
 
 help () {
-	echo "Usage: $(basename $1) COMMAND"
+	echo "Usage: $(basename $1) [COMMAND]"
+	echo "Or:    $(basename $1) URL [TITLE]"
+	echo ""
 	echo "Commands:"
-	cat $1 | grep -E "^\s*[a-z|]+)" | awk '{print "\t"$1"\t"$2}'
+	cat $1 | grep -E "^\s*[a-z|]+)" | awk '{print "\t"$1}'
 }
 
-[ -z "$1" ] && help "$0" && exit 1
-
+if [ -z "$1" ]; then "$0" "unread"; exit; fi
 case "$1" in
-	a) archive "$2" ;;
-	d|del) delete "$2" ;;
-	e|edit) "$EDITOR" "$urls_file" ;;
-	l|list) list ;;
-	la) list "$archive_file" ;;
-	o|open) open "$2" ;;
-	i) interactive ;;
-	ia) interactive "$archive_file" "$urls_file" ;;
-	add) add "$2" ;;
-	s|sync) sync ;;
-	git) "$@" ;;
-	http://*|https://*) add "$1" "$2" ;;
-	*) help "$0" ;;
+	unread|favorite|archive) interactive "$1" ;;
+	git|sync) "$@"; exit ;;
+	http://*|https://*) add "$1" "$2"; exit ;;
+	*) help "$0"; exit ;;
 esac
