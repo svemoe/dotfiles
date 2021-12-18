@@ -47,15 +47,17 @@ open () {
 
 interactive () {
 	list="$1"
-	line="$(list "$list" | fzf | awk '{print $1}')"
-	if [ -z "$line" ]; then exit; fi
 	actions="open\narchive\nfavorite\nunread\ndelete\n"
-	action="$(printf "$actions" | grep -v "$list" | fzf)"
-	if [ -z "$action" ]; then exit; fi
-	case "$action" in
-		unread|favorite|archive) move "$line" "$list" "$action" ;;
-		open|delete) "$action" "$line" "$list" ;;
-	esac
+	while :; do
+		line="$(list "$list" | fzf | awk '{print $1}')"
+		if [ -z "$line" ]; then exit; fi
+		action="$(printf "$actions" | grep -v "$list" | fzf)"
+		if [ -z "$action" ]; then exit; fi
+		case "$action" in
+			unread|favorite|archive) move "$line" "$list" "$action" ;;
+			open|delete) "$action" "$line" "$list" ;;
+		esac
+	done
 }
 
 sync () {
