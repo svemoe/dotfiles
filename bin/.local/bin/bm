@@ -40,29 +40,22 @@ delete () {
 	sed -i "$1d" "$BM_DIR/$2"
 }
 
-archive () {
-	move "$1" "$2" "archive"
-}
-
-favorite () {
-	move "$1" "$2" "favorite"
-}
-
-unread () {
-	move "$1" "$2" "unread"
-}
-
 open () {
 	url="$(get_url $1 $2)"
 	xdg-open "$url"
 }
 
 interactive () {
-	line="$(list "$1" | fzf | awk '{print $1}')"
+	list="$1"
+	line="$(list "$list" | fzf | awk '{print $1}')"
 	if [ -z "$line" ]; then exit; fi
-	action="$(printf "open\narchive\nfavorite\nunread\ndelete\n" | fzf)"
+	actions="open\narchive\nfavorite\nunread\ndelete\n"
+	action="$(printf "$actions" | grep -v "$list" | fzf)"
 	if [ -z "$action" ]; then exit; fi
-	"$action" "$line" "$1"
+	case "$action" in
+		unread|favorite|archive) move "$line" "$list" "$action" ;;
+		open|delete) "$action" "$line" "$list" ;;
+	esac
 }
 
 sync () {
@@ -71,8 +64,9 @@ sync () {
 }
 
 help () {
-	echo "Usage: $(basename $1) [COMMAND]"
-	echo "Or:    $(basename $1) URL [TITLE]"
+	bin="$(basename $1)"
+	echo "Usage: $bin [COMMAND]"
+	echo "Or:    $bin URL [TITLE]"
 	echo ""
 	echo "Commands:"
 	cat $1 | grep -E "^\s*[a-z|]+)" | awk '{print "\t"$1}'
