@@ -13,7 +13,7 @@ get_url () {
 
 add () {
 	url="$1"
-	cat "$urls_file" "$archive_file" | grep "$url" \
+	cat $BM_DIR/{unread,favorite,archive} | grep "$url" \
 	  && "$NOTIFY" "Already saved!" \
 	  && exit
 	[ -z "$2" ] \
@@ -22,7 +22,7 @@ add () {
 	    | sed -E 's-</?title>--g')" \
 	  || title="$2"
 	
-	echo "$url $title" >> "$urls_file"
+	echo "$url $title" >> $BM_DIR/unread
 	
 	"$NOTIFY" "Bookmark added! ($title)"
 }
