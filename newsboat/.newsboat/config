@@ -35,3 +35,4 @@ bind-key a toggle-show-read-feeds
 bind-key S reload-all
 bind-key ESC quit
 bind-key o open-in-browser-and-mark-read
+bind-key M bookmark
