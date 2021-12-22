@@ -29,8 +29,8 @@ add () {
 	"$NOTIFY" "Bookmark added! ($title)"
 }
 
-list () {
-	cat -n "$BM_DIR/$1"
+random () {
+	shuf -n 1 "$BM_DIR/unread" | awk '{print $1}' | xargs xdg-open
 }
 
 move () {
@@ -51,7 +51,7 @@ interactive () {
 	list="$1"
 	actions="open\narchive\nfavorite\nunread\ndelete\n"
 	while :; do
-		line="$(list "$list" | "$selector" | awk '{print $1}')"
+		line="$(cat -n "$BM_DIR/$1" | "$selector" | awk '{print $1}')"
 		if [ -z "$line" ]; then exit; fi
 		action="$(printf "$actions" | grep -v "$list" | "$selector")"
 		if [ -z "$action" ]; then exit; fi
@@ -103,7 +103,7 @@ if [ -z "$1" ]; then "$0" "unread"; exit; fi
 case "$1" in
 	unread|favorite|archive)
 		interactive "$1" ;;
-	git|sync|html)
+	git|sync|html|random)
 		"$@"; exit ;;
 	http://*|https://*)
 		add "$1" "$2"; exit ;;
