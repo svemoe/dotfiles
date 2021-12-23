@@ -2,5 +2,6 @@
 
 case $1 in
 *.png|*.jpg) curl $1 | setsid -f $IMAGE_VIEWER -;;
+*youtube.com/watch*) setsid -f mpv $1 ;;
 *) setsid -f $BROWSER $1 ;;
 esac
