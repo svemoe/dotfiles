@@ -23,7 +23,7 @@ c.url.searchengines = {
     'w': 'https://en.wikipedia.org/w/index.php?search={}',
     'wd': 'https://de.wikipedia.org/w/index.php?search={}'
 }
-c.url.start_pages = ['qute://bookmarks/']
+c.url.start_pages = ['https://svenmoeller.xyz/bookmarks.html']
 
 config.load_autoconfig(False) # Load config done via GUI
 

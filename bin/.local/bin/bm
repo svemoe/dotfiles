@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 selector=fzf
 
@@ -84,7 +84,7 @@ html () {
 
 to_html ()
 {
-	echo "<h2>$1</h2>"
+	echo "<h2>${1^}</h2>"
 	echo "<ul>"
 	sed -e 's_^\(\S*\)\s*$_\1 \1_' -e 's_\s_">_' "$BM_DIR/$1" -e 's_^_<li><a href="_' -e 's_$_</a></li>_'
 	echo "</ul>"
