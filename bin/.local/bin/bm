@@ -49,7 +49,7 @@ open () {
 
 download () {
 	url="$(get_url $1 $2)"
-	pandoc "$url" -o "$(echo "$url" | sha1sum | cut -d' ' -f1).epub"
+	pandoc --verbose -o "$(echo "$url" | sha1sum | cut -d' ' -f1).epub" "$url"
 }
 
 interactive () {
