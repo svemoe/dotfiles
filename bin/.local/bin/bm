@@ -44,7 +44,7 @@ delete () {
 
 open () {
 	url="$(get_url $1 $2)"
-	xdg-open "$url"
+	"$LINK_HANDLER" "$url"
 }
 
 interactive () {
