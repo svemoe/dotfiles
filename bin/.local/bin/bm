@@ -47,9 +47,14 @@ open () {
 	"$LINK_HANDLER" "$url"
 }
 
+download () {
+	url="$(get_url $1 $2)"
+	pandoc "$url" -o "$(echo "$url" | sha1sum | cut -d' ' -f1).epub"
+}
+
 interactive () {
 	list="$1"
-	actions="open\narchive\nfavorite\nunread\ndelete\n"
+	actions="open\narchive\nfavorite\nunread\ndelete\ndownload\n"
 	while :; do
 		line="$(cat -n "$BM_DIR/$1" | "$selector" | awk '{print $1}')"
 		if [ -z "$line" ]; then exit; fi
@@ -57,7 +62,7 @@ interactive () {
 		if [ -z "$action" ]; then exit; fi
 		case "$action" in
 			unread|favorite|archive) move "$line" "$list" "$action" ;;
-			open|delete) "$action" "$line" "$list" ;;
+			open|delete|download) "$action" "$line" "$list" ;;
 		esac
 	done
 }
