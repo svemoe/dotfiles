@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 [ -z "$selector" ] && selector=fzf
 
@@ -77,7 +77,7 @@ interactive () {
 
 all () {
 	actions="open\ndownload\necho\nqr\nclip"
-	line="$(cat -n "$BM_DIR"/{unread,favorite,archive} | "$selector")"
+	line="$(cat -n "$BM_DIR"/unread "$BM_DIR"/favorite "$BM_DIR"/archive | "$selector")"
 	url="$(echo "$line" | awk '{print $2}')"
 	if [ -z "$line" ]; then exit; fi
 	action="$(printf "$actions" | "$selector")"
