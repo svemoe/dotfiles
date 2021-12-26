@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-selector=fzf
+[ -z "$selector" ] && selector=fzf
 
 [ -z "$BM_DIR" ] \
   && echo "No directory specified!" \
@@ -8,10 +8,6 @@ selector=fzf
 
 export GIT_WORK_TREE="$BM_DIR"
 export GIT_DIR="$BM_DIR/.git"
-
-get_url () {
-	sed -n "$1p" "$BM_DIR/$2" | awk '{print $1}'
-}
 
 add () {
 	url="$1"
@@ -30,7 +26,7 @@ add () {
 }
 
 random () {
-	shuf -n 1 "$BM_DIR/unread" | awk '{print $1}' | xargs xdg-open
+	shuf -n 1 "$BM_DIR/unread" | awk '{print $1}' | xargs "$LINK_HANDLER"
 }
 
 move () {
@@ -43,30 +39,49 @@ delete () {
 }
 
 open () {
-	url="$(get_url $1 $2)"
+	url="$1"
 	"$LINK_HANDLER" "$url"
 }
 
 download () {
-	url="$(get_url $1 $2)"
-	title="$(echo "$url" | sed 's_/$__' | rev | cut -d'/' -f1 | rev | sed 's_\..*__')"
-	echo $title
-	pandoc --verbose -o "$BM_DIR/saved/$title.epub" "$url"
+	url="$1"
+	name="$(echo "$url" | sed 's_/$__' | rev | cut -d'/' -f1 | rev | sed 's_\..*__')"
+	pandoc --verbose -o "$BM_DIR/saved/$name.epub" "$url"
+}
+
+qr () {
+	url="$1"
+	qrencode -t UTF8 "$url"
+}
+
+clip () {
+	url="$1"
+	echo "$url" | xclip -selection "clipboard"
 }
 
 interactive () {
 	list="$1"
-	actions="open\narchive\nfavorite\nunread\ndelete\ndownload\n"
-	while :; do
-		line="$(cat -n "$BM_DIR/$1" | "$selector" | awk '{print $1}')"
-		if [ -z "$line" ]; then exit; fi
-		action="$(printf "$actions" | grep -v "$list" | "$selector")"
-		if [ -z "$action" ]; then exit; fi
-		case "$action" in
-			unread|favorite|archive) move "$line" "$list" "$action" ;;
-			open|delete|download) "$action" "$line" "$list" ;;
-		esac
-	done
+	actions="open\narchive\nfavorite\nunread\ndelete\ndownload\necho\nqr\nclip\n"
+	l="$(cat -n "$BM_DIR/$list" | "$selector")"
+	line="$(echo "$l" | awk '{print $1}')"
+	url="$(echo "$l" | awk '{print $2}')"
+	if [ -z "$line" ]; then exit; fi
+	action="$(printf "$actions" | grep -v "$list" | "$selector")"
+	if [ -z "$action" ]; then exit; fi
+	case "$action" in
+		unread|favorite|archive) move "$line" "$list" "$action" ;;
+		delete) "$action" "$line" "$list" ;;
+		open|download|echo|qr|clip) "$action" "$url" ;;
+	esac
+}
+
+all () {
+	actions="open\ndownload\necho\nqr\nclip"
+	line="$(cat -n "$BM_DIR"/{unread,favorite,archive} | "$selector")"
+	url="$(echo "$line" | awk '{print $2}')"
+	if [ -z "$line" ]; then exit; fi
+	action="$(printf "$actions" | "$selector")"
+	"$action" "$url"
 }
 
 sync () {
@@ -113,7 +128,7 @@ if [ -z "$1" ]; then "$0" "unread"; exit; fi
 case "$1" in
 	unread|favorite|archive)
 		interactive "$1" ;;
-	git|sync|html|random)
+	git|sync|html|random|all)
 		"$@"; exit ;;
 	http://*|https://*)
 		add "$1" "$2"; exit ;;
