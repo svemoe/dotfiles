@@ -49,7 +49,7 @@ open () {
 
 download () {
 	url="$(get_url $1 $2)"
-	title="$(sed 's_/$__' | rev | cut -d'/' -f1 | rev | sed 's_\..*__')"
+	title="$(echo "$url" | sed 's_/$__' | rev | cut -d'/' -f1 | rev)"
 	echo $title
 	pandoc --verbose -o "$BM_DIR/saved/$title.epub" "$url"
 }
