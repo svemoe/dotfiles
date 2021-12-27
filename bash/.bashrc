@@ -12,3 +12,6 @@ alias gs="git status"
 alias gd="git diff"
 alias gc="git commit"
 alias ga="git add"
+
+wordlist="$(bm -h | sed -n '/\t/p' | awk '{print $1}' | sort | tr '\n' ' ')"
+complete -W "$wordlist" bm
