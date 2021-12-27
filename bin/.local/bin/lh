@@ -4,6 +4,6 @@ url="$(echo "$1" | sed 's/?.*$//')"
 
 case $url in
 *.png|*.jpg) curl $url | setsid -f $IMAGE_VIEWER -;;
-*.mp3|*.ogg|*youtube.com/watch*) setsid -f mpv --force-window $url > /dev/null 2>&1 & ;;
-*) setsid -f $BROWSER $url > /dev/null 2>&1 & ;;
+*.mp3|*.ogg|*youtube.com/watch*) setsid -f mpv --force-window $1 > /dev/null 2>&1 & ;;
+*) setsid -f $BROWSER $1 > /dev/null 2>&1 & ;;
 esac
