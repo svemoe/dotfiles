@@ -1,4 +1,5 @@
 refresh-on-startup yes
+reload-threads 100
 bookmark-cmd "bm"
 bookmark-autopilot yes
 scrolloff 10
