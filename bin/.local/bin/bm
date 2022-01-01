@@ -93,17 +93,13 @@ sync () {
 
 html () {
 	echo '<!DOCTYPE html>'
-	echo '<html>'
-	echo '<head>'
 	echo '<meta charset="utf-8">'
+	echo '<link rel=stylesheet href=style.css>'
+	echo '<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌍</text></svg>">'
 	echo '<title>Bookmarks</title>'
-	echo '</head>'
-	echo '<body>'
 	echo "<h1>Bookmarks</h1>"
 	to_html favorite
 	to_html unread
-	echo '</body>'
-	echo '</html>'
 }
 
 to_html ()
@@ -111,7 +107,7 @@ to_html ()
 	title="$(echo "$1" | head -c 1 | tr [:lower:] [:upper:])$(echo "$1" | tail -c +2)"
 	echo "<h2>$title</h2>"
 	echo "<ul>"
-	sed -e 's_^\(\S*\)\s*$_\1 \1_' -e 's_\s_">_' "$BM_DIR/$1" -e 's_^_<li><a href="_' -e 's_$_</a></li>_'
+	sed -e 's_^\(\S*\)\s*$_\1 \1_' -e 's_\s_">_' "$BM_DIR/$1" -e 's_^_<li><a href="_' -e 's_$_</a>_'
 	echo "</ul>"
 }
 
