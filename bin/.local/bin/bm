@@ -95,7 +95,7 @@ html () {
 	echo '<!DOCTYPE html>'
 	echo '<meta charset="utf-8">'
 	echo '<link rel=stylesheet href=style.css>'
-	echo '<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌍</text></svg>">'
+	echo '<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔖</text></svg>">'
 	echo '<title>Bookmarks</title>'
 	echo "<h1>Bookmarks</h1>"
 	to_html favorite
