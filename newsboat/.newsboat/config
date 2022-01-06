@@ -1,4 +1,4 @@
-reload-threads 100
+reload-threads 3
 bookmark-cmd "bm"
 bookmark-autopilot yes
 scrolloff 10
