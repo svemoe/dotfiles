@@ -1,6 +1,6 @@
 #!/bin/sh
 
-[ -z "$selector" ] && selector=fzf
+[ -z "$menu" ] && menu="fzf -i"
 
 [ -z "$BM_DIR" ] \
   && echo "No directory specified!" \
@@ -11,31 +11,32 @@ export GIT_DIR="$BM_DIR/.git"
 
 add () {
 	url="$1"
-	cat $BM_DIR/{unread,favorite,archive} | grep "$url" \
-	  && "$NOTIFY" "Already saved!" \
-	  && exit
+	[ "$1" = "-" ] && read url
+
 	[ -z "$2" ] \
 	  && title="$(curl --compressed --location $url \
-	    | grep -Eo '<title>.*</title>' \
-	    | sed -E 's-</?title>--g')" \
+	  | pup 'title text{}' | tr '\n' ' ' | sed -e 's/\s\+/ /g' -e 's/^ //' -e 's/ $//')" \
 	  || title="$2"
 	
-	echo "$url $title" >> $BM_DIR/unread
+	move "$url $title" unread
 	
 	"$NOTIFY" "Bookmark added! ($title)"
 }
 
 random () {
-	shuf -n 1 "$BM_DIR/unread" | awk '{print $1}' | xargs "$LINK_HANDLER"
+	shuf -n 1 | awk '{print $1}' | xargs "$LINK_HANDLER"
 }
 
 move () {
-	sed -n "$1p" "$BM_DIR/$2" >> "$BM_DIR/$3"
-	delete "$1" "$2"
+	url="$(echo "$1" | awk '{print $1}')"
+	grep -q "$url" "$BM_DIR/$2" || (delete "$url" && echo "$1" >> "$BM_DIR/$2")
 }
 
 delete () {
-	sed -i "$1d" "$BM_DIR/$2"
+	url="$(echo "$1" | sed 's_/_\\/_g')"
+	sed -i "/$url/d" "$BM_DIR/unread"
+	sed -i "/$url/d" "$BM_DIR/favorite"
+	sed -i "/$url/d" "$BM_DIR/archive"
 }
 
 open () {
@@ -62,26 +63,15 @@ clip () {
 interactive () {
 	list="$1"
 	actions="open\narchive\nfavorite\nunread\ndelete\ndownload\necho\nqr\nclip\n"
-	l="$(cat -n "$BM_DIR/$list" | "$selector")"
-	line="$(echo "$l" | awk '{print $1}')"
-	url="$(echo "$l" | awk '{print $2}')"
+	line="$(awk '{print NR" "$0}' | $menu | awk '{$1 = ""; print $0}' | sed 's/^ //')"
+	url="$(echo "$line" | awk '{print $1}')"
 	if [ -z "$line" ]; then exit; fi
-	action="$(printf "$actions" | grep -v "$list" | "$selector")"
+	action="$(printf "$actions" | grep -v "$list" | $menu)"
 	if [ -z "$action" ]; then exit; fi
 	case "$action" in
-		unread|favorite|archive) move "$line" "$list" "$action" ;;
-		delete) "$action" "$line" "$list" ;;
-		open|download|echo|qr|clip) "$action" "$url" ;;
+		unread|favorite|archive) move "$line" "$action" ;;
+		open|delete|download|echo|qr|clip) "$action" "$url" ;;
 	esac
-}
-
-all () {
-	actions="open\ndownload\necho\nqr\nclip"
-	line="$(cat -n "$BM_DIR"/unread "$BM_DIR"/favorite "$BM_DIR"/archive | "$selector")"
-	url="$(echo "$line" | awk '{print $2}')"
-	if [ -z "$line" ]; then exit; fi
-	action="$(printf "$actions" | "$selector")"
-	"$action" "$url"
 }
 
 sync () {
@@ -94,21 +84,26 @@ sync () {
 html () {
 	echo '<!DOCTYPE html>'
 	echo '<meta charset="utf-8">'
-	echo '<link rel=stylesheet href=style.css>'
 	echo '<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔖</text></svg>">'
 	echo '<title>Bookmarks</title>'
 	echo "<h1>Bookmarks</h1>"
-	to_html favorite
-	to_html unread
 }
 
-to_html ()
-{
+to_html () {
 	title="$(echo "$1" | head -c 1 | tr [:lower:] [:upper:])$(echo "$1" | tail -c +2)"
 	echo "<h2>$title</h2>"
 	echo "<ul>"
-	sed -e 's_^\(\S*\)\s*$_\1 \1_' -e 's_\s_">_' "$BM_DIR/$1" -e 's_^_<li><a href="_' -e 's_$_</a>_'
+	sed -e 's_^\(\S*\)\s*$_\1 \1_' -e 's_\s_">_' -e 's_^_<li><a href="_' -e 's_$_</a>_'
 	echo "</ul>"
+}
+
+foo () {
+	case "$1" in
+		-r) random ;;
+		-h) to_html $2 ;;
+		-l) cat ;;
+		*) interactive $2 ;;
+	esac
 }
 
 help () {
@@ -117,16 +112,18 @@ help () {
 	echo "Or:    $bin URL [TITLE]"
 	echo ""
 	echo "Commands:"
-	grep -E "^	[a-z|]+)" $1 | sed 's/)//' | tr '|' '\n' | awk '{print "\t"$1}'
+	grep "^	[a-z|]\+)" $1 | sed 's/)//' | tr '|' '\n' | awk '{print "\t"$1}'
 }
 
-if [ -z "$1" ]; then "$0" "unread"; exit; fi
+if [ -z "$1" ]; then "$0" "unread" "-i"; exit; fi
 case "$1" in
 	unread|favorite|archive)
-		interactive "$1" ;;
-	git|sync|html|random|all)
+		cat "$BM_DIR/$1" | foo "$2" "$1" ;;
+	all)
+		cat "$BM_DIR"/unread "$BM_DIR"/favorite "$BM_DIR"/archive | foo "$2" "$1" ;;
+	git|sync)
 		"$@"; exit ;;
-	http://*|https://*)
+	http://*|https://*|-)
 		add "$1" "$2"; exit ;;
 	*)
 		help "$0"; exit ;;
