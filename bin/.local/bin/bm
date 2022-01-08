@@ -41,7 +41,7 @@ delete () {
 
 open () {
 	url="$1"
-	"$LINK_HANDLER" "$url"
+	$LINK_HANDLER "$url"
 }
 
 interactive () {

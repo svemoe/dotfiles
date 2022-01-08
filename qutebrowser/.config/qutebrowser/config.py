@@ -18,6 +18,7 @@ c.url.searchengines = {
     'ap': 'https://archlinux.org/packages/?q={}',
     'aur': 'https://aur.archlinux.org/packages.php?K={}',
     'aw': 'https://wiki.archlinux.org/?search={}',
+    'ddg': 'https://duckduckgo.com/?q={}',
     'gh': 'https://github.com/search?q={}',
     'lg': 'http://libgen.li/search.php?req={}',
     'w': 'https://en.wikipedia.org/w/index.php?search={}',
@@ -34,4 +35,5 @@ config.bind('gh', 'home')
 config.bind('gr', 'spawn --userscript readability-js')
 config.bind('<Ctrl-b>', 'spawn -v wallabag add {url}')
 config.bind('<Ctrl-Shift-b>', 'spawn -v wallabag add --starred {url}')
-config.bind('<Ctrl-s>', "open javascript:location.href='https://miniflux.svenmoeller.xyz/bookmarklet?uri='+encodeURIComponent(window.location.href)")
+config.bind('<Ctrl-s>', 'spawn lh -g {url}')
+config.bind(',s', 'hint links spawn lh -g {hint-url}')

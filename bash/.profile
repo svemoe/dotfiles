@@ -15,7 +15,7 @@ if [ "$(uname -o)" = "Android" ]; then
 else
 	export TERMINAL=alacritty
 	export BROWSER=qutebrowser
-	export LINK_HANDLER=lh
+	export LINK_HANDLER='lh open'
 	export IMAGE_VIEWER=imv
 	export NOTIFY=notify-send
 fi
