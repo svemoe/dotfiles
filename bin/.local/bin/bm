@@ -44,25 +44,9 @@ open () {
 	"$LINK_HANDLER" "$url"
 }
 
-download () {
-	url="$1"
-	name="$(echo "$url" | sed 's_/$__' | rev | cut -d'/' -f1 | rev | sed 's_\..*__')"
-	pandoc --verbose -o "$BM_DIR/saved/$name.epub" "$url"
-}
-
-qr () {
-	url="$1"
-	qrencode -t UTF8 "$url"
-}
-
-clip () {
-	url="$1"
-	echo "$url" | xclip -selection "clipboard"
-}
-
 interactive () {
 	list="$1"
-	actions="open\narchive\nfavorite\nunread\ndelete\ndownload\necho\nqr\nclip\n"
+	actions="open\narchive\nfavorite\nunread\ndelete\necho\n"
 	line="$(awk '{print NR" "$0}' | $menu | awk '{$1 = ""; print $0}' | sed 's/^ //')"
 	url="$(echo "$line" | awk '{print $1}')"
 	if [ -z "$line" ]; then exit; fi
@@ -70,7 +54,7 @@ interactive () {
 	if [ -z "$action" ]; then exit; fi
 	case "$action" in
 		unread|favorite|archive) move "$line" "$action" ;;
-		open|delete|download|echo|qr|clip) "$action" "$url" ;;
+		open|delete|echo) "$action" "$url" ;;
 	esac
 }
 

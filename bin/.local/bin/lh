@@ -1,9 +1,30 @@
 #!/bin/sh
 
-url="$(echo "$1" | sed 's/?.*$//')"
+open () {
+	url="$(echo "$1" | sed 's/?.*$//')"
 
-case $url in
-*.png|*.jpg) curl $url | setsid -f $IMAGE_VIEWER -;;
-*.mp3|*.ogg|*youtube.com/watch*) setsid -f mpv --force-window $1 > /dev/null 2>&1 & ;;
-*) setsid -f $BROWSER $1 > /dev/null 2>&1 & ;;
-esac
+	case $url in
+		*.png|*.jpg) curl $url | setsid -f $IMAGE_VIEWER -;;
+		*.mp3|*.ogg|*youtube.com/watch*) setsid -f mpv --force-window $1 > /dev/null 2>&1 & ;;
+		*) setsid -f $BROWSER $1 > /dev/null 2>&1 & ;;
+	esac
+}
+
+qrcode () {
+	url="$1"
+	qrencode -t UTF8 "$url"
+}
+
+clipboard () {
+	url="$1"
+	echo "$url" | xclip -selection "clipboard"
+}
+
+download () {
+	url="$1"
+	name="$(echo "$url" | sed 's_/$__' | rev | cut -d'/' -f1 | rev | sed 's_\..*__')"
+	pandoc --verbose -o "$BM_DIR/saved/$name.epub" "$url"
+}
+
+action="$(grep '^[a-z]\+ ()' $0 | sed 's/[^a-z]//g' | fzf)"
+$action "$1"
