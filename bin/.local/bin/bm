@@ -71,6 +71,8 @@ html () {
 	echo '<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔖</text></svg>">'
 	echo '<title>Bookmarks</title>'
 	echo "<h1>Bookmarks</h1>"
+	cat "$BM_DIR"/favorite | to_html favorite
+	cat "$BM_DIR"/unread | to_html unread
 }
 
 to_html () {
@@ -105,7 +107,7 @@ case "$1" in
 		cat "$BM_DIR/$1" | foo "$2" "$1" ;;
 	all)
 		cat "$BM_DIR"/unread "$BM_DIR"/favorite "$BM_DIR"/archive | foo "$2" "$1" ;;
-	git|sync)
+	git|sync|html)
 		"$@"; exit ;;
 	http://*|https://*|-)
 		add "$1" "$2"; exit ;;
