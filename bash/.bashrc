@@ -13,6 +13,12 @@ alias gd="git diff"
 alias gc="git commit"
 alias ga="git add"
 alias sv="mosh sven@svenmoeller.xyz"
+alias cg="git -C ~/.dotfiles"
+alias cgs="git -C ~/.dotfiles status"
+alias cgd="git -C ~/.dotfiles diff"
+alias cgc="git -C ~/.dotfiles commit"
+alias cgp="git -C ~/.dotfiles push"
+alias cs="stow -d ~/.dotfiles"
 
 wordlist="$(bm -h | sed -n '/\t/p' | awk '{print $1}' | sort | tr '\n' ' ')"
 complete -W "$wordlist" bm
