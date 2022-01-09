@@ -12,7 +12,7 @@ c.input.insert_mode.leave_on_load = True
 c.scrolling.smooth = True
 c.tabs.background = False
 c.tabs.show = 'multiple'
-c.url.default_page = 'qute://bookmarks'
+c.url.default_page = 'https://svenmoeller.xyz/bookmarks'
 c.url.searchengines = {
     'DEFAULT': 'https://searx.svenmoeller.xyz/search?q={}',
     'ap': 'https://archlinux.org/packages/?q={}',
@@ -24,7 +24,7 @@ c.url.searchengines = {
     'w': 'https://en.wikipedia.org/w/index.php?search={}',
     'wd': 'https://de.wikipedia.org/w/index.php?search={}'
 }
-c.url.start_pages = ['https://svenmoeller.xyz/bookmarks.html']
+c.url.start_pages = ['https://svenmoeller.xyz/bookmarks']
 
 config.load_autoconfig(False) # Load config done via GUI
 
