@@ -8,10 +8,10 @@ if [ "$(uname -o)" = "Android" ]; then
 	export BROWSER=termux-open
 	export LINK_HANDLER=termux-open
 	export NOTIFY=termux-toast
-#elif [ -z "$DISPLAY" ]; then
-#	export BROWSER=w3m
-#	export LINK_HANDLER=w3m
-#	export NOTIFY=echo
+elif [ -z "$DISPLAY" ]; then
+	export BROWSER=w3m
+	export LINK_HANDLER='lh open'
+	export NOTIFY=echo
 else
 	export TERMINAL=alacritty
 	export BROWSER=qutebrowser

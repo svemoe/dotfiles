@@ -9,7 +9,7 @@ open () {
 	case $url in
 		*.png|*.jpg) curl $url | setsid -f $IMAGE_VIEWER -;;
 		*.mp3|*.ogg|*youtube.com/watch*) setsid -f mpv --force-window $1 > /dev/null 2>&1 & ;;
-		*) setsid -f $BROWSER $1 > /dev/null 2>&1 & ;;
+		*) $BROWSER $1 ;;
 	esac
 }
 
