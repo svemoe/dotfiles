@@ -19,6 +19,3 @@ alias cgd="git -C ~/.dotfiles diff"
 alias cgc="git -C ~/.dotfiles commit"
 alias cgp="git -C ~/.dotfiles push"
 alias cs="stow -d ~/.dotfiles"
-
-wordlist="$(bm -h | sed -n '/\t/p' | awk '{print $1}' | sort | tr '\n' ' ')"
-complete -W "$wordlist" bm
