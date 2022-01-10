@@ -30,7 +30,7 @@ elif [ -z "$DISPLAY" ]; then
 	export LINK_HANDLER='lh open'
 	export NOTIFY=echo
 else
-	export BROWSER=qutebrowser
+	export BROWSER='setsid -f qutebrowser'
 	export LINK_HANDLER='lh open'
 	export NOTIFY=notify-send
 fi
