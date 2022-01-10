@@ -27,5 +27,5 @@ git -C ~/.dotfiles pull
 if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
 	startx
 elif [ "$(uname -o)" != "Android" ]; then
-	screen -dRR
+	screen -dRR && exit
 fi
