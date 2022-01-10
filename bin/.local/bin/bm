@@ -83,11 +83,17 @@ to_html () {
 	echo "</ul>"
 }
 
+edit () {
+	cat > /dev/null
+	"$EDITOR" "$BM_DIR/$1"
+}
+
 foo () {
 	case "$1" in
 		-r) random ;;
 		-h) to_html $2 ;;
 		-l) cat ;;
+		-e) edit $2 ;;
 		*) interactive $2 ;;
 	esac
 }
