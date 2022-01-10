@@ -20,3 +20,17 @@ alias cgp="git -C ~/.dotfiles push"
 alias cgr="git -C ~/.dotfiles restore"
 alias cga="git -C ~/.dotfiles add"
 alias cs="stow -d ~/.dotfiles"
+
+if [ "$(uname -o)" = "Android" ]; then
+	export BROWSER=termux-open
+	export LINK_HANDLER=termux-open
+	export NOTIFY=termux-toast
+elif [ -z "$DISPLAY" ]; then
+	export BROWSER=w3m
+	export LINK_HANDLER='lh open'
+	export NOTIFY=echo
+else
+	export BROWSER=qutebrowser
+	export LINK_HANDLER='lh open'
+	export NOTIFY=notify-send
+fi

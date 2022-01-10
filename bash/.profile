@@ -3,22 +3,8 @@ export BM_DIR=~/documents/bookmarks
 export LEDGER_FILE="$HOME/documents/documents/ledger.txt"
 
 export EDITOR=nvim
-
-if [ "$(uname -o)" = "Android" ]; then
-	export BROWSER=termux-open
-	export LINK_HANDLER=termux-open
-	export NOTIFY=termux-toast
-elif [ -z "$DISPLAY" ]; then
-	export BROWSER=w3m
-	export LINK_HANDLER='lh open'
-	export NOTIFY=echo
-else
-	export TERMINAL=alacritty
-	export BROWSER=qutebrowser
-	export LINK_HANDLER='lh open'
-	export IMAGE_VIEWER=imv
-	export NOTIFY=notify-send
-fi
+export TERMINAL=alacritty
+export IMAGE_VIEWER=imv
 
 [ -f ~/.bashrc ] && . ~/.bashrc
 
