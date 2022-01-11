@@ -13,5 +13,5 @@ git -C ~/.dotfiles pull
 if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
 	startx
 elif [ -z "$STY" ] && [ -z "$TMUX" ] && [ "$(uname -o)" != "Android" ]; then
-	screen -dRR && exit
+	tmux new -AD && exit
 fi
