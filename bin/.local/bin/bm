@@ -44,9 +44,14 @@ open () {
 	$LINK_HANDLER "$url"
 }
 
+more () {
+	url="$1"
+	lh "$url"
+}
+
 interactive () {
 	list="$1"
-	actions="open\narchive\nfavorite\nunread\ndelete\necho\n"
+	actions="open\narchive\nfavorite\nunread\ndelete\nmore\n"
 	line="$(awk '{print NR" "$0}' | $menu | awk '{$1 = ""; print $0}' | sed 's/^ //')"
 	url="$(echo "$line" | awk '{print $1}')"
 	if [ -z "$line" ]; then exit; fi
@@ -54,7 +59,7 @@ interactive () {
 	if [ -z "$action" ]; then exit; fi
 	case "$action" in
 		unread|favorite|archive) move "$line" "$action" ;;
-		open|delete|echo) "$action" "$url" ;;
+		open|delete|more) "$action" "$url" ;;
 	esac
 }
 
