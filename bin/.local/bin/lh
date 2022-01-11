@@ -25,9 +25,12 @@ clipboard () {
 }
 
 download () {
-	url="$1"
-	name="$(echo "$url" | sed 's_/$__' | rev | cut -d'/' -f1 | rev | sed 's_\..*__')"
-	pandoc --verbose -o "$BM_DIR/saved/$name.epub" "$url"
+	if [ "$(uname -o)" != "Android" ]; then
+		name="$(echo "$1" | sed 's_/$__' | rev | cut -d'/' -f1 | rev | sed 's_\..*__')"
+		pandoc --verbose -o "$BM_DIR/saved/$name.epub" "$1"
+	else
+		ssh git@svenmoeller.xyz -- BM_DIR=/home/git/documents/bookmarks .local/bin/lh download "$1"
+	fi
 }
 
 bookmark () {
