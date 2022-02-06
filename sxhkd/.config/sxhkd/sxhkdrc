@@ -14,16 +14,15 @@ XF86HomePage
 	qutebrowser
 
 XF86Mail
-	$TERMINAL -e neomutt && notmuch new && pkill -RTMIN+5 dwmblocks
+	$TERMINAL -e neomutt
 
 XF86Calculator
-	$TERMINAL -e scroll newsboat
-	#$TERMINAL qalc
+	$TERMINAL -e qalc
 
 Print
 	scrot -s
 
-super + shift + Return
+alt + shift + Return
 	$TERMINAL
 
 super + e
@@ -35,10 +34,7 @@ super + y
 super + c
 	$TERMINAL -e cava
 
-super + o
-	gopass ls --flat | dmenu | xargs --no-run-if-empty gopass show -f | head -n 1 | xdotool type --clearmodifiers --delay 400 --file -
-
-super + u
+alt + o
 	passfill
 
 super + odiaeresis
