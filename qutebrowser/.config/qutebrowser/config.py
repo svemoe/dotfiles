@@ -7,7 +7,7 @@ c.content.blocking.adblock.lists = [
 ]
 c.content.blocking.method = 'adblock'
 c.fonts.default_size = '16pt'
-c.input.insert_mode.auto_load = False
+c.input.insert_mode.auto_load = True
 c.input.insert_mode.leave_on_load = True
 c.scrolling.smooth = True
 c.tabs.background = False
