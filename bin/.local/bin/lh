@@ -37,22 +37,19 @@ bookmark () {
 	bm "$1"
 }
 
-_choose () {
+choose () {
 	[ $gui = true ] && menu="dmenu"
 	action="$(grep '^[a-z]\+ ()' | sed 's/[^a-z]//g' | $menu)"
 	$action "$1"
 }
 
-while [ $# -gt 0 ]; do
-	case $1 in
-		-g) gui=true ;;
-		-*) echo "Unknown option: $1" ;;
-		-o) open $2 ;;
-		*)
-			[ $# -eq 2 ] && "$1" "$2" && exit
-			[ $# -eq 1 ] && cat "$0" | _choose "$1"
-			;;
-	esac
-	shift
-done
-
+case $1 in
+	-g) gui=true ;;
+	-o) open $2 ;;
+	-c) choose ;;
+	-*) echo "Unknown option: $1" ;;
+	*)
+		[ $# -eq 2 ] && "$1" "$2" && exit
+		[ $# -eq 1 ] && cat "$0" | open "$1"
+		;;
+esac
