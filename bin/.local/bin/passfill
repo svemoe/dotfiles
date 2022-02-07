@@ -3,6 +3,6 @@
 account="$(gopass ls --flat | dmenu | xargs -r gopass find | head -n1)"
 entry="$(gopass show "$account")"
 echo "$entry" | grep "login:" | cut -d' '  -f2 | xclip
-echo "$entry" | grep "url:" | cut -d' '  -f2 | xargs -r qutebrowser
+echo "$entry" | grep "url:" | cut -d' '  -f2 | xargs -r $BROWSER
 gopass -c "$account"
 gopass otp "$account" | xargs -r notify-send -t 60000
