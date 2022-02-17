@@ -1,0 +1,15 @@
+defaults
+auth on
+tls on
+tls_starttls off
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile ~/.msmtp.log
+
+account mailbox
+host smtp.mailbox.org
+port 465
+from sven.moeller@mailbox.org
+user sven.moeller@mailbox.org
+passwordeval "gopass -o mail/mailbox.org"
+
+account default : mailbox

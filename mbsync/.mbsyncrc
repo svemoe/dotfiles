@@ -1,0 +1,22 @@
+IMAPAccount mailbox
+Host imap.mailbox.org
+User sven.moeller@mailbox.org
+PassCmd "gopass mail/mailbox.org"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore mailbox-remote
+Account mailbox
+
+MaildirStore mailbox-local
+SubFolders Verbatim
+Path ~/.mail/mailbox/
+Inbox ~/.mail/mailbox/Inbox
+
+Channel mailbox
+Far :mailbox-remote:
+Near :mailbox-local:
+Patterns *
+Create Both
+Expunge Both
+SyncState *
