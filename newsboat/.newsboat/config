@@ -6,6 +6,11 @@ text-width 80
 browser $LINK_HANDLER
 show-read-feeds no
 
+urls-source "miniflux"
+miniflux-url "https://miniflux.svenmoeller.xyz/"
+miniflux-login "sven"
+miniflux-passwordeval "gopass server/sven@miniflux"
+
 highlight article "^Title:.*$" blue default
 highlight article "Title:" default default
 highlight article "https?://[^ ]+" cyan default

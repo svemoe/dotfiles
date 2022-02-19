@@ -66,8 +66,8 @@ interactive () {
 sync () {
 	git diff --quiet || git commit -am "Update"
 	git pull && git push
-	rsync -avzu git@svenmoeller.xyz:/home/git/documents/bookmarks/cache.db "$BM_DIR"/cache.db
-	rsync -avzu "$BM_DIR"/cache.db git@svenmoeller.xyz:/home/git/documents/bookmarks/cache.db
+	#rsync -avzu git@svenmoeller.xyz:/home/git/documents/bookmarks/cache.db "$BM_DIR"/cache.db
+	#rsync -avzu "$BM_DIR"/cache.db git@svenmoeller.xyz:/home/git/documents/bookmarks/cache.db
 }
 
 html () {
