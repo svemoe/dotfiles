@@ -8,8 +8,6 @@ export IMAGE_VIEWER=imv
 
 [ -f ~/.bashrc ] && . ~/.bashrc
 
-git -C ~/.dotfiles pull
-
 if [ "$(uname -o)" = "Android" ]; then
 	export BROWSER=termux-open
 	export LINK_HANDLER=termux-open
