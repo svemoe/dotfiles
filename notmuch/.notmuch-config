@@ -1,0 +1,19 @@
+[database]
+path=/home/sven/.mail
+
+[user]
+name=Sven Möller
+primary_email=sven.moeller@mailbox.org
+
+[new]
+tags=new;
+ignore=.uidvalidity;.mbsyncstate
+
+[search]
+exclude_tags=
+
+[maildir]
+synchronize_flags=true
+
+[crypto]
+gpg_path=gpg
