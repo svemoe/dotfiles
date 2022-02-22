@@ -42,3 +42,4 @@ bind-key ESC quit
 bind-key o open-in-browser-and-mark-read
 bind-key M bookmark
 macro o set browser "lh -g" ; open-in-browser ; set browser "$LINK_HANDLER"
+macro y set browser "printf %u | xclip -sel clip" ; open-in-browser ; set browser lh
