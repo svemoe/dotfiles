@@ -34,11 +34,14 @@ super + y
 super + c
 	$TERMINAL -e cava
 
-alt + o
+super + p
 	passfill
 
 super + o
-	menu="dmenu -i -l 10" bm all open
+	menu="dmenu -i -l 44" bm all open
+
+super + i
+	sfeed_plain ~/.sfeed/feeds/* | sort -g -k1.3 -r | dmenu -i -l 44 | xurls | xargs lh open
 
 super + odiaeresis
 	i3lock -c 000000
