@@ -8,7 +8,8 @@ open () {
 
 	case $url in
 		*.png|*.jpg|*.jpeg) curl $url | setsid -f $IMAGE_VIEWER -;;
-		*.mp3|*.ogg|*youtube.com/watch*) setsid -f mpv --force-window $1 > /dev/null 2>&1 & ;;
+		*.mp3|*.ogg|*youtube.com/watch*|*invidious.snopyta.org/watch*)
+			setsid -f mpv --force-window $1 > /dev/null 2>&1 & ;;
 		*) $BROWSER $1 ;;
 	esac
 }

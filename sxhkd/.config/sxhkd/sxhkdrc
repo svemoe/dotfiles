@@ -37,6 +37,9 @@ super + c
 alt + o
 	passfill
 
+super + o
+	menu="dmenu -i -l 10" bm all open
+
 super + odiaeresis
 	i3lock -c 000000
 

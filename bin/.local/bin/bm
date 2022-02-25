@@ -24,7 +24,7 @@ add () {
 }
 
 random () {
-	shuf -n 1 | awk '{print $1}' | xargs "$LINK_HANDLER"
+	shuf -n 1 | awk '{print $1}' | xargs $LINK_HANDLER
 }
 
 move () {
@@ -51,11 +51,12 @@ more () {
 
 interactive () {
 	list="$1"
+	action="$2"
 	actions="open\narchive\nfavorite\nunread\ndelete\nmore\n"
 	line="$(awk '{print NR" "$0}' | $menu | awk '{$1 = ""; print $0}' | sed 's/^ //')"
 	url="$(echo "$line" | awk '{print $1}')"
 	if [ -z "$line" ]; then exit; fi
-	action="$(printf "$actions" | grep -v "$list" | $menu)"
+	[ -z "$action" ] && action="$(printf "$actions" | grep -v "$list" | $menu)"
 	if [ -z "$action" ]; then exit; fi
 	case "$action" in
 		unread|favorite|archive) move "$line" "$action" ;;
@@ -95,12 +96,12 @@ edit () {
 }
 
 foo () {
-	case "$1" in
+	case "$2" in
 		-r) random ;;
-		-h) to_html $2 ;;
+		-h) to_html $1 ;;
 		-l) cat ;;
-		-e) edit $2 ;;
-		*) interactive $2 ;;
+		-e) edit $1 ;;
+		*) interactive $@ ;;
 	esac
 }
 
@@ -116,9 +117,9 @@ help () {
 if [ -z "$1" ]; then "$0" "unread" "-i"; exit; fi
 case "$1" in
 	unread|favorite|archive)
-		cat "$BM_DIR/$1" | foo "$2" "$1" ;;
+		cat "$BM_DIR/$1" | foo "$@" ;;
 	all)
-		cat "$BM_DIR"/unread "$BM_DIR"/favorite "$BM_DIR"/archive | foo "$2" "$1" ;;
+		cat "$BM_DIR"/unread "$BM_DIR"/favorite "$BM_DIR"/archive | foo "$@";;
 	git|sync|html)
 		"$@"; exit ;;
 	http://*|https://*|-)
