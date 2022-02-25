@@ -1,4 +1,8 @@
 #!/bin/sh
 
+feeds=~/.sfeed/feeds/*
+path=/var/www/news
+
 sfeed_update
-sfeed_html ~/.sfeed/feeds/* > /var/www/news/index.html
+sfeed_html $feeds > $path/index.html
+sfeed_plain $feeds | sort -gr -k1.3 > $path/index.txt
