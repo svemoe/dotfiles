@@ -1,8 +1,19 @@
 #!/bin/sh
 
-feeds=~/.sfeed/feeds/*
 path=/var/www/news
 
 sfeed_update
-sfeed_html $feeds > $path/index.html
-sfeed_plain $feeds | sort -gr -k1.3 > $path/index.txt
+cd ~/.sfeed/feeds/
+
+feeds="$(awk -F'\t' '
+BEGIN { OFS = "\t"; }
+{
+	$2 = "[" FILENAME "] " $2;
+	print $0 
+}' * | sort -gr | head -n100)"
+
+echo "$feeds" | sfeed_html > $path/index.html
+echo "$feeds" | sfeed_plain > $path/index.txt
+
+sfeed_atom * > $path/feeds.xml
+sfeed_html * > $path/feeds/index.html
