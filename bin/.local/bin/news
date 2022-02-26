@@ -4,4 +4,5 @@
 	&& menu="dmenu -i -l 44" \
 	|| menu="fzf"
 
-curl -s https://news.svenmoeller.xyz/index.txt | $menu | xurls | xargs -r lh open
+curl -s https://news.svenmoeller.xyz/index.txt | $menu\
+	| grep -Eo 'https?://\S+' | xargs -r lh open
