@@ -5,4 +5,4 @@
 	|| menu="fzf"
 
 curl -s https://news.svenmoeller.xyz/index.txt | $menu\
-	| grep -Eo 'https?://\S+' | xargs -r lh open
+	| grep -Eo 'https?://\S+' | xargs -r xdg-open
