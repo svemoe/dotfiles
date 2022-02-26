@@ -41,7 +41,7 @@ super + o
 	menu="dmenu -i -l 44" bm all open
 
 super + i
-	sfeed_plain ~/.sfeed/feeds/* | sort -g -k1.3 -r | dmenu -i -l 44 | xurls | xargs -r lh open
+	news -g
 
 super + odiaeresis
 	i3lock -c 000000
