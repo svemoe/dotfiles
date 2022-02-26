@@ -1,0 +1,22 @@
+#!/bin/sh
+
+case $1 in
+	toggle)
+		pgrep mpv \
+			&& echo '{ "command": ["cycle", "pause"] }' \
+				| socat - "/tmp/mpvsocket" \
+			|| mpc toggle
+		;;
+	next)
+		pgrep mpv \
+			&& echo '{ "command": ["seek", "30"] }' \
+				| socat - "/tmp/mpvsocket" \
+			|| mpc next
+		;;
+	prev)
+		pgrep mpv \
+			&& echo '{ "command": ["seek", "-15", "exact"] }' \
+				| socat - "/tmp/mpvsocket" \
+			|| mpc prev
+		;;
+esac

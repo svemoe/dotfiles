@@ -12,14 +12,11 @@ export IMAGE_VIEWER=imv
 
 if [ "$(uname -o)" = "Android" ]; then
 	export BROWSER=termux-open
-	export LINK_HANDLER=termux-open
 	export NOTIFY=termux-toast
-else
-	export LINK_HANDLER='lh open'
 fi
 
 if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
-	export BROWSER='setsid -f qutebrowser'
+	export BROWSER='setsid -f qutebrowser &> /dev/null'
 	export NOTIFY=notify-send
 	startx
 elif [ -z "$STY" ] && [ -z "$TMUX" ] && [ "$(uname -o)" != "Android" ]; then
