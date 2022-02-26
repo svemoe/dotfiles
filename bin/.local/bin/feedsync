@@ -14,6 +14,5 @@ BEGIN { OFS = "\t"; }
 
 echo "$feeds" | sfeed_html > $path/index.html
 echo "$feeds" | sfeed_plain > $path/index.txt
-
-sfeed_atom * > $path/feeds.xml
+echo "$feeds" | sfeed_atom > $path/feeds.xml
 sfeed_html * > $path/feeds/index.html
