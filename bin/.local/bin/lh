@@ -10,14 +10,22 @@ open () {
 		*.png|*.jpg|*.jpeg) curl $url | setsid -f imv -;;
 		*.mp3|*.ogg|*youtube.com/watch*|*invidious.snopyta.org/watch*)
 			mpv --fs --force-window $1 > /dev/null 2>&1 & ;;
-		*) qutebrowser $1 > /dev/null 2>&1 & ;;
+		*) openbrowser $1 ;;
 	esac
 }
 
+openbrowser () {
+	if [ $gui = true ] ; then
+		qutebrowser $1 > /dev/null 2>&1 &
+	else
+		python -m readability.readability -u $1 2> /dev/null | w3m -T text/html
+	fi
+	}
+
 qr () {
-	[ $gui = true ] && \
-		qrencode -o - "$1" | imv - || \
-		qrencode -t UTF8 "$1"
+	[ $gui = true ] \
+		&& qrencode -o - "$1" | imv - \
+		|| qrencode -t UTF8 "$1"
 }
 
 clipboard () {
@@ -44,13 +52,17 @@ choose () {
 	$action "$1"
 }
 
+while [ $# -gt 0 ]; do
 case $1 in
-	-g) gui=true ;;
-	-o) open $2 ;;
-	-c) choose ;;
-	-*) echo "Unknown option: $1" ;;
+	-g)
+		gui=true
+		shift ;;
+	-o) open $2 && exit ;;
+	-c) choose && exit;;
+	-*) echo "Unknown option: $1" && exit ;;
 	*)
 		[ $# -eq 2 ] && "$1" "$2" && exit
-		[ $# -eq 1 ] && cat "$0" | open "$1"
+		[ $# -eq 1 ] && cat "$0" | open "$1" && exit
 		;;
 esac
+done

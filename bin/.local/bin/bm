@@ -1,6 +1,13 @@
 #!/bin/sh
 
-[ -z "$menu" ] && menu="fzf -i"
+if [ "$1" = "-g" ] ; then
+	menu="dmenu -i -l 44"
+	browser="lh -g"
+	shift
+else
+	menu="fzf -i"
+	browser="lh"
+fi
 
 [ -z "$BM_DIR" ] \
   && echo "No directory specified!" \
@@ -41,12 +48,12 @@ delete () {
 
 open () {
 	url="$1"
-	$LINK_HANDLER "$url"
+	$browser "$url"
 }
 
 more () {
 	url="$1"
-	lh "$url"
+	$browser -c "$url"
 }
 
 interactive () {
@@ -114,7 +121,12 @@ help () {
 	grep "^	[a-z|]\+)" $1 | sed 's/)//' | tr '|' '\n' | awk '{print "\t"$1}'
 }
 
-if [ -z "$1" ]; then "$0" "unread" "-i"; exit; fi
+
+if [ -z "$1" ] ; then
+	cat "$BM_DIR/unread" | interactive unread;
+	exit;
+fi
+
 case "$1" in
 	unread|favorite|archive)
 		cat "$BM_DIR/$1" | foo "$@" ;;

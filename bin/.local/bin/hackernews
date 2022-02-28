@@ -8,5 +8,5 @@ else
 	browser="lh"
 fi
 
-curl -s https://news.svenmoeller.xyz/index.txt | $menu\
+curl -s https://news.ycombinator.com/rss | sfeed | sfeed_plain | $menu\
 	| grep -Eo 'https?://\S+' | xargs -r $browser

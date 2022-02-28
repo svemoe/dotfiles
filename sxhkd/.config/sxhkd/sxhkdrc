@@ -37,11 +37,14 @@ super + c
 super + p
 	passfill
 
-super + o
-	menu="dmenu -i -l 44" bm all open
+super + b
+	bm -g all open
 
-super + i
+super + n
 	news -g
+
+super + h
+	hackernews -g
 
 super + odiaeresis
 	i3lock -c 000000
