@@ -58,7 +58,7 @@ case $1 in
 		gui=true
 		shift ;;
 	-o) open $2 && exit ;;
-	-c) choose && exit;;
+	-c) cat "$0" | choose $2 && exit;;
 	-*) echo "Unknown option: $1" && exit ;;
 	*)
 		[ $# -eq 2 ] && "$1" "$2" && exit
