@@ -4,8 +4,6 @@ gui=false
 menu="fzf -i"
 
 open () {
-	url="$(echo "$1" | sed 's/medium.com/scribe.rip/')"
-
 	case $url in
 		*.png|*.jpg|*.jpeg) curl $url | setsid -f imv -;;
 		*.mp3|*.ogg|*youtube.com/watch*|*invidious.snopyta.org/watch*)
@@ -77,4 +75,6 @@ while [ $# -gt 1 ]; do
 done
 
 [ -z "$action" ] && action="open"
-cat "$0" | "$action" "$1"
+url="$(echo "$1" | sed 's/medium.com/scribe.rip/')"
+
+cat "$0" | "$action" "$url"
