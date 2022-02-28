@@ -18,7 +18,7 @@ openbrowser () {
 	if [ $gui = true ] ; then
 		qutebrowser $1 > /dev/null 2>&1 &
 	else
-		python -m readability.readability -u $1 2> /dev/null | w3m -T text/html
+		python -m readability.readability -u $1 | w3m -T text/html
 	fi
 	}
 
@@ -52,17 +52,29 @@ choose () {
 	$action "$1"
 }
 
-while [ $# -gt 0 ]; do
-case $1 in
-	-g)
-		gui=true
-		shift ;;
-	-o) open $2 && exit ;;
-	-c) cat "$0" | choose $2 && exit;;
-	-*) echo "Unknown option: $1" && exit ;;
-	*)
-		[ $# -eq 2 ] && "$1" "$2" && exit
-		[ $# -eq 1 ] && cat "$0" | open "$1" && exit
-		;;
-esac
+while [ $# -gt 1 ]; do
+	case $1 in
+		-g)
+			gui="true"
+			shift
+			;;
+		-o)
+			action="open"
+			shift
+			;;
+		-c)
+			action="choose"
+			shift
+			;;
+		-*)
+			echo "Unknown option: $1"
+			shift
+			;;
+		*)
+			"$1" "$2" && exit
+			;;
+	esac
 done
+
+[ -z "$action" ] && action="open"
+cat "$0" | "$action" "$1"
