@@ -1,2 +1,6 @@
 [ui]
 theme=solarized-dark
+history=true
+
+[logging]
+chlog=true
