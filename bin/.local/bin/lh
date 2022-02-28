@@ -4,13 +4,13 @@ gui=false
 menu="fzf -i"
 
 open () {
-	url="$(echo "$1" | sed 's/?.*$//')"
+	url="$(echo "$1" | sed 's/medium.com/scribe.rip/')"
 
 	case $url in
 		*.png|*.jpg|*.jpeg) curl $url | setsid -f imv -;;
 		*.mp3|*.ogg|*youtube.com/watch*|*invidious.snopyta.org/watch*)
-			mpv --fs --force-window $1 > /dev/null 2>&1 & ;;
-		*) openbrowser $1 ;;
+			mpv --fs --force-window $url > /dev/null 2>&1 & ;;
+		*) openbrowser $url ;;
 	esac
 }
 
