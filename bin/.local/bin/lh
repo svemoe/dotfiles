@@ -6,7 +6,7 @@ menu="fzf -i"
 open () {
 	case $url in
 		*.png|*.jpg|*.jpeg) curl $url | setsid -f imv -;;
-		*.mp3|*.ogg|*youtube.com/watch*|*invidious.snopyta.org/watch*)
+		*.mp3|*.ogg|*/watch*|*/w/*)
 			mpv --fs --force-window $url > /dev/null 2>&1 & ;;
 		*) openbrowser $url ;;
 	esac
@@ -16,7 +16,7 @@ openbrowser () {
 	if [ $gui = true ] ; then
 		qutebrowser $1 > /dev/null 2>&1 &
 	else
-		python -m readability.readability -u $1 | w3m -T text/html
+		w3m $1
 	fi
 	}
 

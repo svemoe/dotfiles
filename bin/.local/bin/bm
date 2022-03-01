@@ -92,9 +92,9 @@ html () {
 to_html () {
 	title="$(echo "$1" | head -c 1 | tr [:lower:] [:upper:])$(echo "$1" | tail -c +2)"
 	echo "<h2>$title</h2>"
-	echo "<ul>"
-	sed -e 's_^\(\S*\)\s*$_\1 \1_' -e 's_\s_">_' -e 's_^_<li><a href="_' -e 's_$_</a>_'
-	echo "</ul>"
+	echo "<pre>"
+	sed -e 's_^\(\S*\)\s*$_\1 \1_' -e 's_\s_">_' -e 's_^_<a href="_' -e 's_$_</a>_'
+	echo "</pre>"
 }
 
 edit () {
