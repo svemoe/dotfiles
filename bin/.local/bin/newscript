@@ -1,9 +1,12 @@
 #!/bin/sh
 
 [ -z "$1" ] && exit 1
-[ -f "$1" ] && echo "File already exists!" && exit 1
 
-touch "$1"
-chmod +x "$1"
-printf '#!/bin/sh\n\n\n' > "$1"
-vim + $1
+file=~/.dotfiles/bin/.local/bin/$1
+
+[ -f "$file" ] && echo "File already exists!" && exit 1
+
+touch "$file"
+chmod +x "$file"
+printf '#!/bin/sh\n\n\n' > "$file"
+nvim + $file

@@ -1,0 +1,27 @@
+#!/bin/sh
+
+url='https://ich-tanke.de/tankstellen/super-e10/umkreis/36041-fulda/'
+dir='/var/www/tanken'
+
+cd "$dir"
+
+curl -s "$url" | grep -o '\[{"date.*}\]' | jq -r '.[] | [.date, .close] | @tsv' > "data.tsv.update"
+echo "$daily"
+
+cat data.tsv.update data.tsv | sort -r | uniq > data.tsv.new
+mv data.tsv.new data.tsv
+
+daily="$(cat data.tsv.update | awk -F '\t' '{ sum += $2 }; END { printf("%.2f", sum/NR); }')"
+total="$(cat data.tsv | awk -F '\t' '{ sum += $2 }; END { printf("%.2f", sum/NR); }')"
+hour="$(grep "$(date +'%H'):00:00" data.tsv | awk -F '\t' '{ sum += $2 }; END { printf("%.2f", sum/NR); }')"
+
+rm data.tsv.update
+
+echo "<p><a href=$url>$url</a></p>" > "index.html"
+echo "<pre>" >> "index.html"
+printf "Durchschnit gesamt:\t$total\n" >> "index.html"
+printf "Durchschnit 24h:\t$daily\n" >> "index.html"
+printf "Durchschnit Uhrzeit:\t$hour\n" >> "index.html"
+echo "" >> "index.html"
+cat "data.tsv" >> "index.html"
+echo "</pre>" >> "index.html"
