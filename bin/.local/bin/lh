@@ -4,11 +4,19 @@ gui=false
 menu="fzf -i"
 
 open () {
-	case $url in
-		*.png|*.jpg|*.jpeg) curl $url | setsid -f imv -;;
-		*.mp3|*.ogg|*/watch*|*/w/*)
-			mpv --fs --force-window $url > /dev/null 2>&1 & ;;
-		*) openbrowser $url ;;
+	case "$url" in
+		*.png|*.jpg|*.jpeg|*.JPG|*.gif|*.svg|*.webp)
+			$PICVIEWER "$url"
+			;;
+		*.mp3|*.ogg|*.flac|*/watch*|*/w/*|*odysee.com/*)
+			$VIDVIEWER "$url"
+			;;
+		*.pdf|*.epub)
+			$DOCVIEWER "$url"
+			;;
+		*)
+			$TERMINAL epy "$url"
+			;;
 	esac
 }
 
@@ -77,4 +85,4 @@ done
 [ -z "$action" ] && action="open"
 url="$(echo "$1" | sed 's/medium.com/scribe.rip/')"
 
-cat "$0" | "$action" "$url"
+"$action" "$url"
