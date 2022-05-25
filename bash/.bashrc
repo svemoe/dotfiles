@@ -23,3 +23,15 @@ alias cgr="git -C ~/.dotfiles restore"
 alias cga="git -C ~/.dotfiles add"
 alias cs="stow -d ~/.dotfiles"
 alias sf="sfeed_curses ~/.sfeed/feeds/*"
+alias w3m="w3m -B"
+
+if [ -z $DISPLAY ]; then
+	export BROWSER="w3m"
+	export DOCVIEWER="jfbview --zoom_to_fit"
+	export PICVIEWER="mpv --loop-file=inf --really-quiet"
+	export TERMINAL="tmux new-window"
+else
+	export DOCVIEWER="zathura"
+	export PICVIEWER="imv"
+	export TERMINAL="alacritty"
+fi
