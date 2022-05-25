@@ -8,7 +8,7 @@ cd "$dir"
 curl -s "$url" | grep -o '\[{"date.*}\]' | jq -r '.[] | [.date, .close] | @tsv' > "data.tsv.update"
 echo "$daily"
 
-cat data.tsv.update data.tsv | sort -r | uniq > data.tsv.new
+cat data.tsv data.tsv.update | sort | uniq > data.tsv.new
 mv data.tsv.new data.tsv
 
 daily="$(cat data.tsv.update | awk -F '\t' '{ sum += $2 }; END { printf("%.2f", sum/NR); }')"
@@ -23,5 +23,5 @@ printf "Durchschnit gesamt:\t$total\n" >> "index.html"
 printf "Durchschnit 24h:\t$daily\n" >> "index.html"
 printf "Durchschnit Uhrzeit:\t$hour\n" >> "index.html"
 echo "" >> "index.html"
-cat "data.tsv" >> "index.html"
+tac "data.tsv" >> "index.html"
 echo "</pre>" >> "index.html"
