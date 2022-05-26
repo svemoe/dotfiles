@@ -11,7 +11,7 @@ XF86Audio{Lower,Raise}Volume
 	pulse-ctl {down,up}
 
 XF86HomePage
-	qutebrowser
+	$BROWSER
 
 XF86Mail
 	$TERMINAL -e neomutt
