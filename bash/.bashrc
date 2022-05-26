@@ -30,8 +30,4 @@ if [ -z $DISPLAY ]; then
 	export DOCVIEWER="jfbview --zoom_to_fit"
 	export PICVIEWER="mpv --loop-file=inf --really-quiet"
 	export TERMINAL="tmux new-window"
-else
-	export DOCVIEWER="zathura"
-	export PICVIEWER="imv"
-	export TERMINAL="alacritty"
 fi
