@@ -8,7 +8,6 @@ export EDITOR=nvim
 export VIDVIEWER=mpv
 
 setleds -D +num 2> /dev/null
-#udiskie &
 
 [ -f ~/.bashrc ] && . ~/.bashrc
 
