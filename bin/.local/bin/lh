@@ -20,14 +20,6 @@ open () {
 	esac
 }
 
-openbrowser () {
-	if [ $gui = true ] ; then
-		qutebrowser $1 > /dev/null 2>&1 &
-	else
-		w3m $1
-	fi
-	}
-
 qr () {
 	[ $gui = true ] \
 		&& qrencode -o - "$1" | imv - \
