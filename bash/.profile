@@ -16,13 +16,10 @@ if [ "$(uname -o)" = "Android" ]; then
 	export NOTIFY=termux-toast
 fi
 
-#if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
-#	export BROWSER='setsid -f qutebrowser'
-#	export NOTIFY=notify-send
-#	startx
-#elif [ -z "$STY" ] && [ -z "$TMUX" ] && [ "$(uname -o)" != "Android" ]; then
-if [ -z "$STY" ] && [ -z "$TMUX" ] && [ "$(uname -o)" != "Android" ]; then
-	export BROWSER='w3m'
-	export NOTIFY=echo
-	tmux new -AD
+if [ -z "$TMUX" ]; then
+	if [ -z "SSH_TTY" ]; then
+		tmux new -AD
+	else
+		tmux new -AD && exit
+	fi
 fi
