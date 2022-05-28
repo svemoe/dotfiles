@@ -1,0 +1,22 @@
+[calendars]
+
+[[my_calendar_local]]
+path = ~/.calendars/*
+type = discover
+
+[[my_contacts_local]]
+path = ~/.contacts/32
+type = birthdays
+
+[locale]
+timeformat = %H:%M
+dateformat = %d.%m.%Y
+longdateformat = %d.%m.%Y
+datetimeformat = %d.%m.%Y %H:%M
+longdatetimeformat = %d.%m.%Y %H:%M
+unicode_symbols = False
+weeknumbers = left
+
+[default]
+highlight_event_days = True
+timedelta = 1d
