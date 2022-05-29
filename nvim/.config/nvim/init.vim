@@ -1,3 +1,7 @@
+call plug#begin()
+Plug 'freitass/todo.txt-vim'
+call plug#end()
+
 " Has to be the same!
 set tabstop=4
 set shiftwidth=4

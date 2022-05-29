@@ -25,6 +25,7 @@ alias cs="stow -d ~/.dotfiles"
 alias sf="sfeed_curses ~/.sfeed/feeds/*"
 alias w3m="w3m -B"
 alias search="surfraw search"
+alias t="todo.sh"
 
 if [ -z $DISPLAY ]; then
 	export BROWSER="w3m"
