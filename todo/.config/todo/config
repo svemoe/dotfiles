@@ -64,10 +64,10 @@ export REPORT_FILE="$TODO_DIR/report.txt"
 
 # There is highlighting for projects, contexts, dates, and item numbers.
 #
-# export COLOR_PROJECT=$RED
-# export COLOR_CONTEXT=$RED
+export COLOR_PROJECT=$RED
+export COLOR_CONTEXT=$BLUE
 # export COLOR_DATE=$BLUE
-# export COLOR_NUMBER=$LIGHT_GREY
+export COLOR_NUMBER=$YELLOW
 
 # There is highlighting for metadata key:value pairs e.g.
 # DUE:2006-08-01 or note:MYNOTE
