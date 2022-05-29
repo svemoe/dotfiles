@@ -13,6 +13,7 @@ setleds -D +num 2> /dev/null
 
 if [ -z "$TMUX" ]; then
 	if [ -z "$SSH_TTY" ]; then
+		export TERM=linux-16color
 		tmux new -AD
 	else
 		tmux new -AD && exit

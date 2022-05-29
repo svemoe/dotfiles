@@ -28,7 +28,7 @@ alias search="surfraw search"
 alias t="todo.sh"
 
 if [ "$TERM" = "linux" ]; then
-#    echo -en "\e]P0222222" #black    -> this is the background color as well.
+#    echo -en "\e]P0000000" #black    -> this is the background color as well.
 #    echo -en "\e]P1803232" #darkred
 #    echo -en "\e]P25b762f" #darkgreen
 #    echo -en "\e]P3aa9943" #brown

@@ -10,5 +10,3 @@ set number
 set list listchars=tab:>-,lead:.,trail:.,space:.
 set copyindent
 set colorcolumn=80
-
-highlight Visual ctermbg=7 ctermfg=0
