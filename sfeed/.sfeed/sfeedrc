@@ -1,0 +1,48 @@
+#sfeedpath="$HOME/.sfeed/feeds"
+
+# list of feeds to fetch:
+feeds() {
+	# feed <name> <feedurl> [basesiteurl] [encoding]
+	feed 'Arabesque' 'https://blog.sanctum.geek.nz/feed/'
+	feed 'Arch Linux: Recent news updates' 'https://archlinux.org/feeds/news/'
+	feed 'Armed and Dangerous' 'http://esr.ibiblio.org/?feed=rss2'
+	feed 'Bartosz Ciechanowski' 'https://ciechanow.ski/atom.xml'
+	feed 'mailbox.org' 'https://mailbox.org/share/feed-de-mailbox.xml'
+	feed 'Bugswriter' 'https://bugswriter.com/atom.xml'
+	feed 'Codemadness' 'https://codemadness.org/atom_content.xml'
+	feed 'endtimes.dev' 'https://endtimes.dev/feed.xml'
+	feed 'F-Droid' 'https://f-droid.org/feed.xml'
+	feed 'FSF blogs' 'https://static.fsf.org/fsforg/rss/blogs.xml'
+	feed 'History for Atheists' 'https://historyforatheists.com/feed/'
+	feed 'Jacob'\''s Unnamed Blog' 'https://jacobwsmith.xyz/rss.xml'
+	feed 'Not Related' 'https://notrelated.xyz/rss'
+	feed 'Kris Occhipinti' 'https://odysee.com/$/rss/@metalx1000:c'
+	feed 'Kuketz IT-Security' 'https://www.kuketz-blog.de/feed/'
+	feed 'LineageOS' 'https://lineageos.org/feed.xml'
+	feed 'LOW←TECH MAGAZINE' 'https://solar.lowtechmagazine.com/feeds/all-en.atom.xml'
+	feed 'Luke Smith Blog' 'https://lukesmith.xyz/rss.xml'
+	feed 'Luke Smith Videos' 'https://videos.lukesmith.xyz/feeds/videos.xml?accountId=3'
+	feed 'Monero' 'https://www.getmonero.org/feed.xml'
+	feed 'NINA' 'https://warnung.bund.de/api31/mowas/rss/066310000000.rss'
+	feed 'PAPIERLOS LESEN' 'https://papierlos-lesen.de/feed/'
+	feed 'PINE64' 'https://www.pine64.org/feed/'
+	feed 'Raptitude.com' 'https://www.raptitude.com/feed/'
+	feed 'Roosh Valizadeh' 'https://www.rooshv.com/feed'
+	feed 'Schneier on Security' 'https://www.schneier.com/feed/atom/'
+	feed 'suckless.org news' 'https://suckless.org/atom.xml'
+	feed 'the singularity is nearer' 'https://geohot.github.io/blog/feed.xml'
+}
+
+# filter fields.
+# filter(name)
+filter() {
+	sed 's_www.youtube.com_yewtu.be_g'
+}
+
+# fetch a feed via HTTP/HTTPS etc 
+# fetch(name, url, feedfile)
+fetch() {
+	curl -L --max-redirs 0 -f -s -m 15 \
+		-H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0' \
+		"$2" 2>/dev/null
+}
