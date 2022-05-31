@@ -26,12 +26,3 @@ alias sf="sfeed_curses ~/.sfeed/feeds/*"
 alias w3m="w3m -B"
 alias search="surfraw search"
 alias t="todo.sh"
-
-if [ -z "$DISPLAY" ]; then
-	export BROWSER="w3m"
-	export DOCVIEWER="jfbview --zoom_to_fit"
-	export PICVIEWER="mpv --loop-file=inf --really-quiet"
-	export TERMINAL="tmux new-window"
-
-	export SFEED_PLUMBER_INTERACTIVE="1"
-fi

@@ -1,11 +1,18 @@
-export LIBVA_DRIVER_NAME=i965
-
 export PATH=$PATH:~/.local/bin
-export BM_DIR=~/documents/bookmarks
-export LEDGER_FILE="$HOME/documents/documents/ledger.txt"
 
+# Define Programs
 export EDITOR=nvim
 export VIDVIEWER=mpv
+export BROWSER="w3m"
+export DOCVIEWER="jfbview --zoom_to_fit"
+export PICVIEWER="mpv --loop-file=inf --really-quiet"
+export TERMINAL="tmux new-window"
+
+# Define Program Settings
+export SFEED_PLUMBER_INTERACTIVE="1"
+export BM_DIR=~/documents/bookmarks
+export LEDGER_FILE="$HOME/documents/documents/ledger.txt"
+export LIBVA_DRIVER_NAME=i965
 
 setleds -D +num 2> /dev/null
 
