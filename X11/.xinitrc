@@ -2,7 +2,7 @@
 export TERMINAL="setsid -f st"
 export BROWSER="setsid -f qutebrowser"
 export DOCVIEWER="setsid -f zathura"
-export PICVIEWER="setsid -f sxiv"
+export PICVIEWER="setsid -f nsxiv"
 export MENU="dmenu -i -l 44"
 
 # keyboard
