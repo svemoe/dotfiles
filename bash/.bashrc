@@ -1,3 +1,5 @@
+export MENU="fzf"
+
 alias ls="ls --human-readable --color=auto"
 alias df="df --human-readable"
 alias du="du --human-readable"
@@ -26,5 +28,5 @@ alias sf="sfeed_curses ~/.sfeed/feeds/*"
 alias w3m="w3m -B"
 alias search="surfraw search"
 alias t="todo.sh"
-
-export MENU="fzf"
+source /usr/share/bash-completion/completions/todo.sh
+complete -F _todo t
