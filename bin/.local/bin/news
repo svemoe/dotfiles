@@ -1,12 +1,4 @@
 #!/bin/sh
 
-if [ "$1" = "-g" ] ; then
-	menu="dmenu -i -l 44"
-	browser="lh -g"
-else
-	menu="fzf"
-	browser="lh"
-fi
-
-curl -s https://news.svenmoeller.xyz/index.txt | $menu\
-	| grep -Eo 'https?://\S+' | xargs -r $browser
+curl -s https://news.svenmoeller.xyz/index.txt | $MENU\
+	| grep -Eo 'https?://\S+' | xargs -r $BROWSER

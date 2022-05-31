@@ -84,7 +84,7 @@ mailer /usr/bin/mail
 extbrowser lh
 extbrowser2 mpv
 extbrowser3 qutebrowser
-extbrowser4 
+extbrowser4 $TERMINAL epy
 extbrowser5 
 extbrowser6 
 extbrowser7 

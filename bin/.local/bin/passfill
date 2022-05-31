@@ -1,12 +1,6 @@
 #!/bin/sh
 
-if [ -z "$DISPLAY" ]; then
-	menu=fzf
-else
-	menu=dmenu
-fi
-
-account="$(gopass ls --flat | $menu | xargs -r gopass find | head -n1)"
+account="$(gopass ls --flat | $MENU | xargs -r gopass find | head -n1)"
 entry="$(gopass show "$account")"
 
 if [ -z "$DISPLAY" ]; then

@@ -15,7 +15,7 @@ open () {
 			$DOCVIEWER "$url"
 			;;
 		*)
-			$TERMINAL epy "$url"
+			$BROWSER "$url"
 			;;
 	esac
 }
