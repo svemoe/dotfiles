@@ -5,6 +5,8 @@ export DOCVIEWER="setsid -f zathura"
 export PICVIEWER="setsid -f nsxiv"
 export MENU="dmenu -i -l 44"
 
+export SFEED_YANKER="xclip -r"
+
 # keyboard
 setxkbmap -model pc105 -layout de
 xmodmap $HOME/.config/X11/Xmodmap

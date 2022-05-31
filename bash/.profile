@@ -10,6 +10,7 @@ export TERMINAL="tmux new-window"
 
 # Define Program Settings
 export SFEED_PLUMBER_INTERACTIVE="1"
+export SFEED_YANKER="tmux load-buffer -"
 export BM_DIR=~/documents/bookmarks
 export LEDGER_FILE="$HOME/documents/documents/ledger.txt"
 export LIBVA_DRIVER_NAME=i965
