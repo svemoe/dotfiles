@@ -1,12 +1,17 @@
 [calendars]
 
 [[my_calendar_local]]
-path = ~/.calendars/*
-type = discover
+path = ~/.calendars/Y2FsOi8vMC8zMQ
+color = dark red
 
 [[my_contacts_local]]
 path = ~/.contacts/32
 type = birthdays
+color = dark blue
+
+[[holidays]]
+path = ~/.holidays
+color = yellow
 
 [locale]
 timeformat = %H:%M

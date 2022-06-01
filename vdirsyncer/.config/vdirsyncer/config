@@ -1,0 +1,52 @@
+[general]
+status_path = "~/.local/share/vdirsyncer/status/"
+
+# CARDDAV
+[pair my_contacts]
+a = "my_contacts_local"
+b = "my_contacts_remote"
+collections = ["from a", "from b"]
+metadata = ["displayname"]
+
+[storage my_contacts_local]
+type = "filesystem"
+path = "~/.contacts/"
+fileext = ".vcf"
+
+[storage my_contacts_remote]
+type = "carddav"
+url = "https://dav.mailbox.org"
+username = "sven.moeller@mailbox.org"
+password.fetch = ["command", "gopass", "-o", "mail/mailbox.org"]
+
+# CALDAV
+[pair my_calendar]
+a = "my_calendar_local"
+b = "my_calendar_remote"
+collections = ["from a", "from b"]
+metadata = ["displayname", "color"]
+
+[storage my_calendar_local]
+type = "filesystem"
+path = "~/.calendars/"
+fileext = ".ics"
+
+[storage my_calendar_remote]
+type = "caldav"
+url = "https://dav.mailbox.org"
+username = "sven.moeller@mailbox.org"
+password.fetch = ["command", "gopass", "-o", "mail/mailbox.org"]
+
+[pair holidays]
+a = "holidays_public"
+b = "holidays_private"
+collections = null
+
+[storage holidays_public]
+type = "http"
+url = "https://www.thunderbird.net/media/caldata/GermanHolidays.ics"
+
+[storage holidays_private]
+type = "filesystem"
+path = "~/.holidays/"
+fileext = ".ics"
