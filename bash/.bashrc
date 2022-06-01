@@ -16,7 +16,7 @@ alias gc="git commit"
 alias ga="git add"
 alias gr="git restore"
 alias sv="mosh sven@svenmoeller.xyz"
-alias cg="git -C ~/.dotfiles"
+alias config="git -C ~/.dotfiles"
 source /usr/share/bash-completion/completions/git
 __git_complete cg __git_main
 alias stow="stow -d ~/.dotfiles"
