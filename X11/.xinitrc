@@ -4,8 +4,9 @@ export BROWSER="setsid -f qutebrowser"
 export DOCVIEWER="setsid -f zathura"
 export PICVIEWER="setsid -f nsxiv"
 export MENU="dmenu -i -l 44"
+export YANKER="xclip -r"
 
-export SFEED_YANKER="xclip -r"
+export SFEED_YANKER="$YANKER"
 
 # keyboard
 setxkbmap -model pc105 -layout de
