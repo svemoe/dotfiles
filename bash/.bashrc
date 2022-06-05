@@ -18,7 +18,7 @@ alias gr="git restore"
 alias sv="mosh sven@svenmoeller.xyz"
 alias config="git -C ~/.dotfiles"
 source /usr/share/bash-completion/completions/git
-__git_complete cg __git_main
+__git_complete config __git_main
 alias stow="stow -d ~/.dotfiles"
 alias sf="sfeed_curses ~/.sfeed/feeds/*"
 alias w3m="w3m -B"
