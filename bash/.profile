@@ -13,7 +13,6 @@ export YANKER="tmux load-buffer -"
 export SFEED_PLUMBER_INTERACTIVE="1"
 export SFEED_YANKER="tr -d '\n' | $YANKER"
 export BM_DIR=~/documents/bookmarks
-export LEDGER_FILE="$HOME/documents/documents/ledger.txt"
 export LIBVA_DRIVER_NAME=i965
 
 setleds -D +num 2> /dev/null
