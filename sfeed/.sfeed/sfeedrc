@@ -28,7 +28,6 @@ feeds() {
 	feed 'PINE64' 'https://www.pine64.org/feed/'
 	feed 'Raptitude.com' 'https://www.raptitude.com/feed/'
 	feed 'Roosh Valizadeh' 'https://www.rooshv.com/feed'
-	feed 'Schneier on Security' 'https://www.schneier.com/feed/atom/'
 	feed 'suckless.org news' 'https://suckless.org/atom.xml'
 	feed 'the singularity is nearer' 'https://geohot.github.io/blog/feed.xml'
 }
