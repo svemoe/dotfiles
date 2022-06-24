@@ -14,6 +14,7 @@ export SFEED_PLUMBER_INTERACTIVE="1"
 export SFEED_YANKER="tr -d '\n' | $YANKER"
 export BM_DIR=~/documents/bookmarks
 export LIBVA_DRIVER_NAME=i965
+export LEDGER_FILE=~/.hledger.journal
 
 setleds -D +num 2> /dev/null
 
