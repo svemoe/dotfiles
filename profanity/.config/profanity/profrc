@@ -4,3 +4,6 @@ history=true
 
 [logging]
 chlog=true
+
+[connection]
+mam=true
