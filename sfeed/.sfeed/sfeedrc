@@ -26,6 +26,7 @@ feeds() {
 	feed 'PAPIERLOS LESEN' 'https://papierlos-lesen.de/feed/'
 	feed 'PINE64' 'https://www.pine64.org/feed/'
 	feed 'Privacy-Handbuch Changelog' 'https://www.privacy-handbuch.de/changelog-handbuch.rss'
+	feed 'Profanity' 'https://profanity-im.github.io/blog/index.xml'
 	feed 'Raptitude.com' 'https://www.raptitude.com/feed/'
 	feed 'Seirdy' 'https://seirdy.one/posts/atom.xml'
 	feed 'suckless.org news' 'https://suckless.org/atom.xml'
