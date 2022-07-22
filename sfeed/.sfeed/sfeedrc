@@ -12,7 +12,6 @@ feeds() {
 	feed 'Codemadness' 'https://codemadness.org/atom_content.xml'
 	feed 'endtimes.dev' 'https://endtimes.dev/feed.xml'
 	feed 'F-Droid' 'https://f-droid.org/feed.xml'
-	feed 'FSF blogs' 'https://static.fsf.org/fsforg/rss/blogs.xml'
 	feed 'History for Atheists' 'https://historyforatheists.com/feed/'
 	feed 'Jacob'\''s Unnamed Blog' 'https://jacobwsmith.xyz/rss.xml'
 	feed 'Not Related' 'https://notrelated.xyz/rss'
@@ -26,8 +25,9 @@ feeds() {
 	feed 'NINA' 'https://warnung.bund.de/api31/mowas/rss/066310000000.rss'
 	feed 'PAPIERLOS LESEN' 'https://papierlos-lesen.de/feed/'
 	feed 'PINE64' 'https://www.pine64.org/feed/'
+	feed 'Privacy-Handbuch Changelog' 'https://www.privacy-handbuch.de/changelog-handbuch.rss'
 	feed 'Raptitude.com' 'https://www.raptitude.com/feed/'
-	feed 'Roosh Valizadeh' 'https://www.rooshv.com/feed'
+	feed 'Seirdy' 'https://seirdy.one/posts/atom.xml'
 	feed 'suckless.org news' 'https://suckless.org/atom.xml'
 	feed 'the singularity is nearer' 'https://geohot.github.io/blog/feed.xml'
 }

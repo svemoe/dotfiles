@@ -12,6 +12,8 @@ export YANKER="tmux load-buffer -"
 # Define Program Settings
 export SFEED_PLUMBER_INTERACTIVE="1"
 export SFEED_YANKER="tr -d '\n' | $YANKER"
+export SFEED_URL_FILE="$HOME/.sfeed/urls"
+[ -f "$SFEED_URL_FILE" ] || touch "$SFEED_URL_FILE"
 export BM_DIR=~/documents/bookmarks
 export LIBVA_DRIVER_NAME=i965
 export LEDGER_FILE=~/.hledger.journal
