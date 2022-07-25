@@ -7,4 +7,4 @@ BEGIN { OFS = "\t"; }
 	$2 = "[" FILENAME "] " $2;
 	print $0 
 }' * | sort -gr | head -n100 | sfeed_plain | $MENU\
-	| grep -Eo 'https?://\S+' | xargs -r $BROWSER
+	| grep -Eo 'https?://\S+' | xargs -r lh
