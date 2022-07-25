@@ -150,6 +150,7 @@ keymap	y	EXTERN 'echo -n %s | $YANKER'
 #keymap	,d	EXTERN_LINK 'tsp youtube-dl %s'
 #keymap	,o	EXTERN 'firefox %s'
 #keymap	,m	EXTERN 'mpv %s'
-#keymap  ,r  COMMAND "SHELL 'readable $W3M_URL > /tmp/readable.html && xdotool key Return' ; LOAD /tmp/readable.html"
+keymap  r  EXTERN 'rdrview'
+keymap  ,r  EXTERN_LINK 'rdrview'
 #keymap  ,d  COMMAND "SHELL 'clear && sdcv $W3M_CURRENT_WORD'"
 #keymap  ,w  COMMAND "SHELL 'stty cols 72 && xdotool key Return'"
