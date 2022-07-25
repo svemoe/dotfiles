@@ -10,6 +10,7 @@ export TERMINAL="tmux new-window"
 export YANKER="tmux load-buffer -"
 
 # Define Program Settings
+export SFEED_PLUMBER="lh"
 export SFEED_PLUMBER_INTERACTIVE="1"
 export SFEED_YANKER="tr -d '\n' | $YANKER"
 export SFEED_URL_FILE="$HOME/.sfeed/urls"
