@@ -8,7 +8,7 @@ open () {
 		*.png|*.jpg|*.jpeg|*.JPG|*.gif|*.svg|*.webp)
 			$PICVIEWER "$url"
 			;;
-		*.mp3|*.ogg|*.flac|*/watch*|*/w/*|*odysee.com/*)
+		*.mp3|*mp4|*.ogg|*.flac|*/watch*|*/w/*|*odysee.com/*)
 			$VIDVIEWER "$url"
 			;;
 		*.pdf|*.epub)

@@ -21,6 +21,7 @@ source /usr/share/bash-completion/completions/git
 __git_complete config __git_main
 alias stow="stow -d ~/.dotfiles"
 alias sf="sfeed_curses ~/.sfeed/feeds/*"
+alias sfu="sfeed_update"
 alias w3m="w3m -B"
 alias search="surfraw search"
 alias t="todo.sh"

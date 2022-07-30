@@ -146,7 +146,7 @@
 #keymap	C-y	DOWN
 keymap	O	EXTERN_LINK
 keymap	y	EXTERN 'echo -n %s | $YANKER'
-#keymap	,y	EXTERN_LINK '(echo -n %s | xsel -b)'
+keymap	,y	EXTERN_LINK 'echo -n %s | $YANKER'
 #keymap	,d	EXTERN_LINK 'tsp youtube-dl %s'
 #keymap	,o	EXTERN 'firefox %s'
 #keymap	,m	EXTERN 'mpv %s'
