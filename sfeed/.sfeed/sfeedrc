@@ -19,6 +19,7 @@ feeds() {
 	feed 'History for Atheists' 'https://historyforatheists.com/feed/'
 	feed 'Jacob Smith' 'https://jacobwsmith.xyz/rss.xml'
 	feed 'Not Related' 'https://notrelated.xyz/rss'
+	feed 'Krebs on Security' 'https://krebsonsecurity.com/feed/'
 	feed 'Kris Occhipinti' 'https://odysee.com/$/rss/@metalx1000:c'
 	feed 'Kuketz IT-Security' 'https://www.kuketz-blog.de/feed/'
 	feed 'Landchad.net' 'https://landchad.net/index.xml'

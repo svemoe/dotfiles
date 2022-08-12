@@ -1,6 +1,6 @@
 #!/bin/sh
 export TERMINAL="setsid -f st"
-export BROWSER="setsid -f qutebrowser"
+export BROWSER="setsid -f firefox"
 export DOCVIEWER="setsid -f zathura"
 export PICVIEWER="setsid -f nsxiv"
 export MENU="dmenu -i -l 44"
