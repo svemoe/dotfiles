@@ -50,3 +50,17 @@ url = "https://www.thunderbird.net/media/caldata/GermanHolidays.ics"
 type = "filesystem"
 path = "~/.holidays/"
 fileext = ".ics"
+
+[pair mvi_calendar]
+a = "mvi_calendar_public"
+b = "mvi_calendar_private"
+collections = null
+
+[storage mvi_calendar_public]
+type = "http"
+url = "https://rest.konzertmeister.app/api/v1/ical/8796fd5f-550d-4c7f-9905-4e7ac9a242ed?hideNegative=false"
+
+[storage mvi_calendar_private]
+type = "filesystem"
+path = "~/.mvi_calendar/"
+fileext = ".ics"

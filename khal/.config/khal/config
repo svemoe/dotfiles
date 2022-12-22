@@ -13,6 +13,10 @@ color = dark blue
 path = ~/.holidays
 color = yellow
 
+[[mvi_calendar]]
+path = ~/.mvi_calendar
+color = dark red
+
 [locale]
 timeformat = %H:%M
 dateformat = %d.%m.%Y
