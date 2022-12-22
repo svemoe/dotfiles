@@ -21,7 +21,7 @@ gnirehtet autorun &
 #calibre-server &
 #bitcoind &
 #electrum-personal-server ~/.config/electrum-personal-server/config.ini &
-udiskie &
+#udiskie &
 
 # appearance
 #picom &

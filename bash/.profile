@@ -25,6 +25,7 @@ setleds -D +num 2> /dev/null
 
 if [ -z "$TMUX" ]; then
 	if [ -z "$SSH_TTY" ]; then
+		udiskie &
 		export TERM=linux-16color
 		tmux new -AD
 	else

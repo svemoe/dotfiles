@@ -26,5 +26,6 @@ alias w3m="w3m -B"
 alias search="surfraw search"
 alias t="todo.sh"
 alias qalc="qalc -s 'decimal comma on'"
+
 source /usr/share/bash-completion/completions/todo.sh
 complete -F _todo t
