@@ -4,6 +4,7 @@ set sleep_time = 0
 set wait_key = no
 set markers = no
 set nm_exclude_tags = deleted
+set nm_default_url= "notmuch:///home/sven/.mail"
 
 set mailcap_path 	= ~/.config/neomutt/mailcap
 auto_view text/html
@@ -81,11 +82,11 @@ bind index , tag-prefix
 bind index <insert> toggle-new
 bind index O sort-reverse
 macro compose p "<postpone-message><shell-escape>notmuch-hook.sh<enter>"
-macro index gi "<change-folder>+outlook/Inbox<enter>" "Go to inbox"
-macro index ga "<change-folder>+mailbox/Archive<enter>" "Go to archiv"
-macro index gs "<change-folder>+outlook/Sent<enter>" "Go to sent"
+macro index gi "<change-folder>+Inbox<enter>" "Go to inbox"
+macro index ga "<change-folder>+Archive<enter>" "Go to archiv"
+macro index gs "<change-folder>+Sent<enter>" "Go to sent"
 macro index,pager S "<sync-mailbox><shell-escape>mbsync -a && notmuch new<enter>" "Run isync"
-macro index,pager A "<save-message>+mailbox/Archive<enter><enter>" "Archive"
+macro index,pager A "<save-message>+Archive<enter><enter>" "Archive"
 macro index,pager M "<save-message>+archiv/" "Move"
 macro index,pager T "<tag-pattern>" "Tag"
 macro index,pager \ca "<tag-pattern>.*<enter>" "Select all"
