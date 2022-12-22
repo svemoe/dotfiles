@@ -22,7 +22,7 @@ XF86Calculator
 Print
 	scrot -s
 
-alt + shift + Return
+super + shift + Return
 	$TERMINAL
 
 super + e
@@ -43,8 +43,8 @@ super + b
 super + n
 	news -g
 
-super + h
-	hackernews -g
+#super + h
+#	hackernews -g
 
 super + odiaeresis
 	i3lock -c 000000
