@@ -1,2 +1,2 @@
-image/*; tmux new-window lh %s
-video/*; tmux new-window lh %s
+image/*; lh %s
+video/*; lh %s
