@@ -3,21 +3,22 @@ bookmark-cmd "bm"
 bookmark-autopilot yes
 scrolloff 10
 text-width 80
-browser $LINK_HANDLER
+browser lh
 show-read-feeds no
 
-urls-source "miniflux"
-miniflux-url "https://miniflux.svenmoeller.xyz/"
-miniflux-login "sven"
-miniflux-passwordeval "gopass server/sven@miniflux"
+urls-source "freshrss"
+freshrss-url "https://news.svemoe.de/api/greader.php"
+freshrss-login "sven"
+freshrss-passwordeval "gopass svenmoeller.xyz/api@freshrss"
+freshrss-flag-star "s"
 
-highlight article "^Title:.*$" blue default
-highlight article "Title:" default default
+highlight article "^Tit(le|el):.*$" red default
+highlight article "Tit(le|el):" default default
 highlight article "https?://[^ ]+" cyan default
-highlight article "\\[[0-9]+\\]" red default
+highlight article "\\[[0-9]+\\]" blue default
 highlight article "\\[image [0-9]+[^\]]+\\]" green default
 highlight article "Links:" blue default
-highlight article "^[ ]*\\* " red default
+highlight article "^[ ]*\\* " blue default
 
 bind-key j down
 bind-key k up

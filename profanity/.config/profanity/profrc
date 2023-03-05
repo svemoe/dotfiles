@@ -2,8 +2,9 @@
 theme=solarized-dark
 history=true
 
-[logging]
-chlog=true
-
 [connection]
-mam=true
+account=sven@svemoe.de
+
+[notifications]
+message=true
+message.text=true

@@ -24,7 +24,9 @@ setleds -D +num 2> /dev/null
 [ -f ~/.bashrc ] && . ~/.bashrc
 
 if [ -z "$TMUX" ]; then
-	if [ -z "$SSH_TTY" ]; then
+	if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+		startwl
+	elif [ -z "$SSH_TTY" ]; then
 		udiskie &
 		export TERM=linux-16color
 		tmux new -AD

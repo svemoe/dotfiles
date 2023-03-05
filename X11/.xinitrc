@@ -24,12 +24,12 @@ gnirehtet autorun &
 #udiskie &
 
 # appearance
-#picom &
+picom &
 xrdb -merge .config/X11/Xresources
 #xrdb -merge .cache/wal/colors.Xresources
 . "${HOME}/.cache/wal/colors.sh"
 #hsetroot -solid "#000000"
-xwallpaper --zoom ~/pictures/wallpaper
+xwallpaper --zoom ~/.wallpaper
 #dwmblocks &
 dunst \
 		-nfr "${color3}" \

@@ -6,7 +6,7 @@ menu="fzf -i"
 open () {
 	case "$url" in
 		*.png|*.jpg|*.jpeg|*.JPG|*.gif|*.svg|*.webp)
-			$PICVIEWER "$url"
+			nsxiv-url "$url"
 			;;
 		*.mp3|*mp4|*.ogg|*.flac|*/watch*|*/w/*|*odysee.com/*)
 			$VIDVIEWER "$url"

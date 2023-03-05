@@ -34,11 +34,11 @@ super + y
 super + c
 	$TERMINAL -e cava
 
-super + p
+super + ssharp
 	passfill
 
-super + b
-	bm -g all open
+#super + b
+#	bm -g all open
 
 super + n
 	news -g

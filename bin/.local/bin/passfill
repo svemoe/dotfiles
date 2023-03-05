@@ -1,6 +1,9 @@
 #!/bin/sh
 
 account="$(gopass ls --flat | $MENU | xargs -r gopass find | head -n1)"
+
+[ -z $account ] && exit
+
 entry="$(gopass show "$account")"
 
 if [ -z "$DISPLAY" ]; then
@@ -9,5 +12,6 @@ else
 	echo "$entry" | grep "login:" | cut -d' '  -f2 | xclip
 	echo "$entry" | grep "url:" | cut -d' '  -f2 | xargs -r $BROWSER
 	gopass -c "$account"
-	gopass otp "$account" | xargs -r notify-send -t 60000
+	echo "$entry" | grep "otpauth:" && \
+		gopass otp "$account" | xargs -r notify-send -t 60000
 fi

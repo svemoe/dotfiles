@@ -11,7 +11,7 @@ auto_view text/html
 alternative_order text/plain text/html
 
 # Sidebar
-set sidebar_visible
+#set sidebar_visible
 set sidebar_format = "%D%?F? [%F]?%* %?N?%N/?%?S?%S?"
 set mail_check_stats
 bind index,pager \Ck sidebar-prev       # Ctrl-Shift-P - Previous Mailbox
