@@ -1,0 +1,25 @@
+{
+    "layer": "top", // Waybar at top layer
+    "spacing": 0, // Gaps between modules (4px)
+
+    // Choose the order of the modules
+    "modules-left": ["wlr/workspaces"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["clock"],
+
+    // Modules configuration
+
+    "wlr/workspaces": {
+        "on-click": "activate"
+    },
+
+    "hyprland/window": {
+        "on-click-middle": "hyprctl dispatch layoutmsg swapwithmaster master"
+    },
+
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+}
+
